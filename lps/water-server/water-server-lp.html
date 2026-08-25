@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ハピウォーター | レンタル料0円の天然水ウォーターサーバー</title>
+<meta name="description" content="レンタル料0円、初期費用0円。おいしい天然水を毎日のくらしに。ハピウォーターの公式サイトです。">
+<style>
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-alt: #F3F8FF;
+    --color-bg-soft: #EAF3FF;
+    --color-text: #17222E;
+    --color-text-muted: #56677A;
+    --color-primary: #1565C0;
+    --color-primary-dark: #0B4A96;
+    --color-primary-soft: #E5F0FF;
+    --color-accent: #FF7A29;
+    --color-accent-dark: #E05F00;
+    --color-badge: #FFC107;
+    --color-border: #E1E9F1;
+    --color-card-bg: #ffffff;
+    --color-header-bg: rgba(255,255,255,0.96);
+    --shadow-card: 0 8px 24px rgba(21, 101, 192, 0.08);
+    --shadow-cta: 0 10px 24px rgba(255, 122, 41, 0.35);
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 8px;
+  }
+
+  :root[data-theme="dark"] {
+    --color-bg: #0E1620;
+    --color-bg-alt: #121C29;
+    --color-bg-soft: #16212F;
+    --color-text: #EAF1F8;
+    --color-text-muted: #9DAEC0;
+    --color-primary: #5B9BF0;
+    --color-primary-dark: #3E7FDB;
+    --color-primary-soft: #16283D;
+    --color-accent: #FF9354;
+    --color-accent-dark: #FF7A29;
+    --color-badge: #FFCF3F;
+    --color-border: #23303F;
+    --color-card-bg: #16202C;
+    --color-header-bg: rgba(14,22,32,0.92);
+    --shadow-card: 0 8px 24px rgba(0,0,0,0.35);
+    --shadow-cta: 0 10px 24px rgba(255, 122, 41, 0.25);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg: #0E1620;
+      --color-bg-alt: #121C29;
+      --color-bg-soft: #16212F;
+      --color-text: #EAF1F8;
+      --color-text-muted: #9DAEC0;
+      --color-primary: #5B9BF0;
+      --color-primary-dark: #3E7FDB;
+      --color-primary-soft: #16283D;
+      --color-accent: #FF9354;
+      --color-accent-dark: #FF7A29;
+      --color-badge: #FFCF3F;
+      --color-border: #23303F;
+      --color-card-bg: #16202C;
+      --color-header-bg: rgba(14,22,32,0.92);
+      --shadow-card: 0 8px 24px rgba(0,0,0,0.35);
+      --shadow-cta: 0 10px 24px rgba(255, 122, 41, 0.25);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .band { padding: 72px 0; }
+  .band-alt { background: var(--color-bg-alt); }
+  .band-soft { background: var(--color-bg-soft); }
+  .band-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: #fff;
+  }
+  h1, h2, h3, h4 { margin: 0; font-weight: 800; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(24px, 4vw, 34px);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 16px;
+    max-width: 640px;
+    margin: 0 auto 48px;
+  }
+  .highlight {
+    background: linear-gradient(transparent 60%, var(--color-badge) 60%);
+    font-weight: 700;
+    padding: 0 2px;
+  }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-header-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo svg { width: 28px; height: 28px; }
+  .header-right { display: flex; align-items: center; gap: 20px; }
+  .header-phone {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+  .header-phone strong {
+    font-size: 20px;
+    color: var(--color-text);
+    letter-spacing: 0.02em;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 800;
+    border-radius: 999px;
+    padding: 14px 30px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-cta {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+    color: #fff;
+    box-shadow: var(--shadow-cta);
+  }
+  .btn-cta:hover { transform: translateY(-2px); }
+  .btn-cta-sm { padding: 10px 22px; font-size: 14px; }
+  .btn-outline {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 64px 0 96px;
+    background: radial-gradient(ellipse at top right, var(--color-primary-soft) 0%, var(--color-bg) 60%);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero-copy .eyebrow { background: var(--color-badge); color: #4A3400; }
+  .hero-title {
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.35;
+    margin-bottom: 20px;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--color-primary);
+  }
+  .hero-desc {
+    font-size: 17px;
+    color: var(--color-text-muted);
+    margin-bottom: 28px;
+  }
+  .hero-price-box {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+  .price-pill {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    box-shadow: var(--shadow-card);
+    text-align: center;
+    min-width: 130px;
+  }
+  .price-pill .label { font-size: 12px; color: var(--color-text-muted); }
+  .price-pill .value { font-size: 22px; font-weight: 800; color: var(--color-accent-dark); }
+  .hero-cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .hero-note { font-size: 13px; color: var(--color-text-muted); margin-top: 12px; }
+
+  .hero-visual {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4/3.4;
+    background: linear-gradient(135deg, var(--color-primary) 0%, #4FA9E8 100%);
+    box-shadow: var(--shadow-card);
+  }
+  .hero-visual .pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+  }
+  .hero-visual .server-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .badge-float {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--color-badge);
+    color: #4A3400;
+    font-weight: 800;
+    font-size: 13px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  /* Pain points */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .pain-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .pain-card .icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    color: var(--color-primary);
+  }
+  .pain-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .pain-card p { font-size: 14px; color: var(--color-text-muted); margin: 0; }
+
+  /* Features */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .feature-card {
+    background: var(--color-card-bg);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border);
+  }
+  .feature-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .feature-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .feature-card p { font-size: 14px; color: var(--color-text-muted); margin: 0; }
+
+  /* Pricing / simulator */
+  .price-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .price-tab {
+    border: 2px solid var(--color-border);
+    background: var(--color-card-bg);
+    border-radius: 999px;
+    padding: 10px 22px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--color-text-muted);
+  }
+  .price-tab.active {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+  }
+  .price-result {
+    max-width: 560px;
+    margin: 0 auto;
+    background: var(--color-card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--color-border);
+    padding: 36px;
+    text-align: center;
+  }
+  .price-result .monthly-label { color: var(--color-text-muted); font-size: 14px; }
+  .price-result .monthly-value {
+    font-size: 44px;
+    font-weight: 800;
+    color: var(--color-accent-dark);
+    margin: 8px 0;
+  }
+  .price-result .monthly-value span { font-size: 18px; font-weight: 700; }
+  .price-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+  }
+  .price-breakdown b { color: var(--color-text); display: block; font-size: 15px; }
+
+  /* Comparison table */
+  .compare-wrap { overflow-x: auto; }
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+    background: var(--color-card-bg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  table.compare th, table.compare td {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+  }
+  table.compare thead th {
+    background: var(--color-bg-soft);
+    font-size: 14px;
+  }
+  table.compare th:first-child, table.compare td:first-child {
+    text-align: left;
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+  table.compare .col-us {
+    background: var(--color-primary-soft);
+    font-weight: 800;
+    color: var(--color-primary-dark);
+    position: relative;
+  }
+  .us-badge {
+    display: inline-block;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+
+  /* Trust badges */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  .trust-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 32px 20px;
+  }
+  .trust-num { font-size: 36px; font-weight: 800; color: var(--color-primary); }
+  .trust-num small { font-size: 16px; }
+  .trust-label { font-size: 14px; color: var(--color-text-muted); margin-top: 6px; }
+  .trust-footnote { text-align: center; font-size: 12px; color: var(--color-text-muted); margin-top: 20px; }
+
+  /* Testimonials */
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .review-card {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+  }
+  .stars { color: var(--color-badge); font-size: 16px; letter-spacing: 2px; margin-bottom: 10px; }
+  .review-card p { font-size: 14px; margin: 0 0 14px; }
+  .review-who { font-size: 12px; color: var(--color-text-muted); display: flex; align-items: center; gap: 10px; }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--color-primary-soft);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-primary); font-weight: 800; font-size: 13px;
+  }
+
+  /* FAQ */
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+  .faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 20px 8px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: "+";
+    font-size: 22px;
+    color: var(--color-primary);
+    transition: transform 0.2s ease;
+    margin-left: 12px;
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item .faq-a {
+    padding: 0 8px 20px;
+    color: var(--color-text-muted);
+    font-size: 14px;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    position: relative;
+    text-align: center;
+    color: #fff;
+    background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, var(--color-accent) 130%);
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15), transparent 50%);
+  }
+  .final-cta h2 { font-size: clamp(26px, 4vw, 36px); margin-bottom: 12px; }
+  .final-cta p { color: rgba(255,255,255,0.85); margin-bottom: 32px; }
+  .final-cta .deadline {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--color-bg-alt);
+    padding: 48px 0 100px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+  }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  /* Mobile fixed CTA */
+  .mobile-cta {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 200;
+    background: var(--color-card-bg);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -6px 20px rgba(0,0,0,0.1);
+  }
+  .mobile-cta-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+  }
+  .mobile-cta a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 0;
+    font-weight: 800;
+    font-size: 15px;
+  }
+  .mobile-cta .call {
+    color: var(--color-primary);
+    background: var(--color-primary-soft);
+  }
+  .mobile-cta .apply {
+    color: #fff;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; aspect-ratio: 16/10; }
+    .pain-grid, .feature-grid, .trust-grid, .review-grid { grid-template-columns: 1fr; }
+    .header-phone { display: none; }
+    .band { padding: 56px 0; }
+    .mobile-cta { display: block; }
+    body { padding-bottom: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C12 2 5 10.5 5 15.5C5 19.6 8.13 22 12 22C15.87 22 19 19.6 19 15.5C19 10.5 12 2 12 2Z" fill="currentColor"/></svg>
+      ハピウォーター
+    </div>
+    <div class="header-right">
+      <div class="header-phone">
+        <span>お電話でのお申込み</span>
+        <strong>0120-987-654</strong>
+        <span>受付 9:00〜18:00（土日祝も対応）</span>
+      </div>
+      <a href="#apply" class="btn btn-cta btn-cta-sm">無料お申込み</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">天然水ウォーターサーバー</span>
+      <h1 class="hero-title">レンタル料<em>0円</em>で、<br>おいしい天然水を毎日に。</h1>
+      <p class="hero-desc">重い水を運ぶ必要なし。ボタン一つで冷水・温水がすぐ使える。赤ちゃんのミルク作りにも、災害時の備えにも選ばれています。</p>
+      <div class="hero-price-box">
+        <div class="price-pill">
+          <div class="label">レンタル料</div>
+          <div class="value">0円</div>
+        </div>
+        <div class="price-pill">
+          <div class="label">初期費用</div>
+          <div class="value">0円</div>
+        </div>
+        <div class="price-pill">
+          <div class="label">月額目安</div>
+          <div class="value">3,700円〜</div>
+        </div>
+      </div>
+      <div class="hero-cta-row">
+        <a href="#apply" class="btn btn-cta">今すぐ無料でお申込み</a>
+        <a href="#compare" class="btn btn-outline">他社と比較する</a>
+      </div>
+      <p class="hero-note">※ 表示価格はすべて税込です。詳細な料金は「料金プラン」セクションをご確認ください。</p>
+    </div>
+    <div class="hero-visual reveal">
+      <!-- IMAGE-SLOT: hero-bg ウォーターサーバーのある明るいリビングの実写、家族が水を飲んでいる雰囲気の写真 -->
+      <svg class="pattern" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="120" fill="rgba(255,255,255,0.15)"/>
+        <circle cx="340" cy="320" r="160" fill="rgba(255,255,255,0.12)"/>
+        <circle cx="320" cy="70" r="60" fill="rgba(255,255,255,0.18)"/>
+      </svg>
+      <div class="server-icon">
+        <svg width="160" height="220" viewBox="0 0 160 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="20" y="10" width="120" height="60" rx="14" fill="rgba(255,255,255,0.9)"/>
+          <rect x="30" y="70" width="100" height="130" rx="10" fill="rgba(255,255,255,0.75)"/>
+          <circle cx="60" cy="110" r="10" fill="#1565C0"/>
+          <circle cx="100" cy="110" r="10" fill="#FF7A29"/>
+          <rect x="45" y="150" width="70" height="12" rx="6" fill="#1565C0"/>
+        </svg>
+      </div>
+      <div class="badge-float">顧客満足度No.1<br><small style="font-weight:400;">(自社調べ)</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <h2 class="section-title reveal">こんなお悩み、ありませんか？</h2>
+    <p class="section-sub reveal">実は多くのご家庭が同じ悩みを抱えています。ハピウォーターなら、その全部を解決できます。</p>
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L4 7v10l8 5 8-5V7l-8-5z" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>重い水を運ぶのが大変</h3>
+        <p>ペットボトルの買い出し・ゴミ出しから解放。ボトルはご自宅までお届けします。</p>
+      </div>
+      <div class="pain-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>ミルク作りにすぐお湯が欲しい</h3>
+        <p>ボタン一つで温水がすぐ出るから、深夜のミルク作りもラクに。</p>
+      </div>
+      <div class="pain-card reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3l9 16H3L12 3z" stroke="currentColor" stroke-width="1.6"/><path d="M12 10v4" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>災害時の水の備えが心配</h3>
+        <p>常にご家庭にストックがある状態に。もしもの備蓄水としても安心です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt">
+  <div class="container">
+    <h2 class="section-title reveal">ハピウォーターが<span class="highlight">選ばれる理由</span></h2>
+    <p class="section-sub reveal">価格・水質・使いやすさ、すべてにこだわりました。</p>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-num">1</div>
+        <h3>レンタル料・初期費用0円</h3>
+        <p>サーバー本体の費用は一切かかりません。お水の代金だけでご利用いただけます。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">2</div>
+        <h3>天然水・RO水から選べる</h3>
+        <p>採水地の天然水はもちろん、赤ちゃんにも使いやすいRO水プランもご用意。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">3</div>
+        <h3>ボタン一つで冷水・温水</h3>
+        <p>チャイルドロック付きで小さなお子様がいるご家庭でも安心です。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">4</div>
+        <h3>卓上・床置きから選べる</h3>
+        <p>お部屋の広さやライフスタイルに合わせてサーバーの形を選べます。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">5</div>
+        <h3>省エネ設計で電気代を節約</h3>
+        <p>スリープ機能付きで、待機時の電気代を抑えられる設計です。</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-num">6</div>
+        <h3>定期メンテナンスで安心</h3>
+        <p>プロによる定期点検・メンテナンスで、いつでも清潔な状態を保ちます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="price">
+  <div class="container">
+    <h2 class="section-title reveal">料金シミュレーション</h2>
+    <p class="section-sub reveal">ご家族の人数を選ぶだけで、月々の目安金額がわかります。</p>
+    <div class="price-tabs reveal">
+      <button class="price-tab active" data-monthly="3700" data-bottles="1本">1人暮らし</button>
+      <button class="price-tab" data-monthly="5550" data-bottles="1.5本">2人家族</button>
+      <button class="price-tab" data-monthly="7400" data-bottles="2本">3〜4人家族</button>
+      <button class="price-tab" data-monthly="11100" data-bottles="3本">5人以上</button>
+    </div>
+    <div class="price-result reveal">
+      <div class="monthly-label">月々の目安料金</div>
+      <div class="monthly-value" id="priceValue">3,700<span>円（税込）</span></div>
+      <div class="price-breakdown">
+        <div><b id="priceBottles">1本</b>お水の目安本数/月</div>
+        <div><b>0円</b>サーバーレンタル料</div>
+        <div><b>0円</b>配送料・初期費用</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-soft" id="compare">
+  <div class="container">
+    <h2 class="section-title reveal">他社サービスとの比較</h2>
+    <p class="section-sub reveal">主要なウォーターサーバーサービスと比べても、コストパフォーマンスに自信があります。</p>
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th class="col-us"><span class="us-badge">当社</span><br>ハピウォーター</th>
+            <th>A社</th>
+            <th>B社</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>レンタル料</td>
+            <td class="col-us">0円</td>
+            <td>0円〜880円</td>
+            <td>1,100円</td>
+          </tr>
+          <tr>
+            <td>初期費用</td>
+            <td class="col-us">0円</td>
+            <td>3,300円</td>
+            <td>0円</td>
+          </tr>
+          <tr>
+            <td>最低契約期間</td>
+            <td class="col-us">なし</td>
+            <td>2年</td>
+            <td>1年</td>
+          </tr>
+          <tr>
+            <td>定期メンテナンス</td>
+            <td class="col-us">無料</td>
+            <td>有料</td>
+            <td>無料</td>
+          </tr>
+          <tr>
+            <td>お水の種類</td>
+            <td class="col-us">天然水 / RO水</td>
+            <td>天然水のみ</td>
+            <td>天然水のみ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="trust-footnote">※ 他社の料金は2026年7月時点の各社公式サイト掲載情報をもとに当社が作成した参考比較です。プランにより異なる場合があります。</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <h2 class="section-title reveal">数字で見るハピウォーター</h2>
+    <div class="trust-grid">
+      <div class="trust-card reveal">
+        <div class="trust-num">98<small>%</small></div>
+        <div class="trust-label">継続利用率（自社調べ）</div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-num">No.1</div>
+        <div class="trust-label">顧客満足度（自社調べ）</div>
+      </div>
+      <div class="trust-card reveal">
+        <div class="trust-num">3<small>採水地</small></div>
+        <div class="trust-label">品質基準クリアの天然水</div>
+      </div>
+    </div>
+    <p class="trust-footnote">※ 上記は自社アンケート調査に基づく数値です。調査概要はお問い合わせください。</p>
+  </div>
+</section>
+
+<section class="band band-alt">
+  <div class="container">
+    <h2 class="section-title reveal">お客様の声</h2>
+    <p class="section-sub reveal">ご利用いただいている方から届いた声の一部をご紹介します。</p>
+    <div class="review-grid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>ペットボトルを買いに行く手間がなくなって、家事の負担がかなり減りました。冷水もすぐ出るので夏場は特に助かっています。</p>
+        <div class="review-who">
+          <div class="review-avatar">30</div>
+          <span>30代・主婦・東京都</span>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>夜中のミルク作りがとても楽になりました。温水がすぐ使えるので、子どもが泣いていてもすぐに対応できます。</p>
+        <div class="review-who">
+          <div class="review-avatar">20</div>
+          <span>20代・子育て中・大阪府</span>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★☆</div>
+        <p>災害時の備えとして導入しましたが、普段使いにも十分満足しています。水の味がクセがなく飲みやすいです。</p>
+        <div class="review-who">
+          <div class="review-avatar">40</div>
+          <span>40代・会社員・愛知県</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="container">
+    <h2 class="section-title reveal">よくあるご質問</h2>
+    <div class="reveal" style="max-width:760px;margin:0 auto;">
+      <details class="faq-item" open>
+        <summary>契約期間の縛りはありますか？</summary>
+        <div class="faq-a">最低契約期間は設けておりません。ご都合に合わせていつでも解約いただけます（解約手数料は発生する場合があります）。</div>
+      </details>
+      <details class="faq-item">
+        <summary>サーバーのメンテナンスは必要ですか？</summary>
+        <div class="faq-a">定期的な部品交換・点検は無料で承っております。日常のお手入れも簡単な拭き取りだけで清潔を保てます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>設置スペースがなくても大丈夫ですか？</summary>
+        <div class="faq-a">卓上タイプもご用意しておりますので、キッチンカウンターなど省スペースでも設置いただけます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>引っ越しの際はどうすればいいですか？</summary>
+        <div class="faq-a">お引越し先の情報をご連絡いただくだけで、配送先の変更が可能です。別途手数料がかかる場合があります。</div>
+      </details>
+      <details class="faq-item">
+        <summary>水を余らせてしまった月はどうなりますか？</summary>
+        <div class="faq-a">ボトルの繰越が可能なプランをご用意しています。無理のないペースでご利用いただけます。</div>
+      </details>
+      <details class="faq-item">
+        <summary>お水の賞味期限はどれくらいですか？</summary>
+        <div class="faq-a">未開封の状態で製造から約半年〜1年が目安です。開封後はできるだけ早めにお飲みください。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta band" id="apply">
+  <div class="container">
+    <span class="deadline">今月のキャンペーン：初回ボトル代0円特典</span>
+    <h2>今なら初回特典つきでお申込みいただけます</h2>
+    <p>お申込みは1〜2分。お電話でも、Webフォームからでもお手続きいただけます。</p>
+    <div class="hero-cta-row" style="justify-content:center;">
+      <a href="#" class="btn btn-cta">Webから無料でお申込み</a>
+      <a href="tel:0120987654" class="btn" style="background:#fff;color:var(--color-primary-dark);">0120-987-654 に電話する</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:var(--color-text);">ハピウォーター</div>
+        <p style="max-width:320px;">運営会社：株式会社ハピウォーター（架空の事業者名です）<br>受付時間 9:00〜18:00（土日祝も対応）</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">運営会社</a>
+        <a href="#">特定商取引法に基づく表記</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">よくある質問</a>
+        <a href="#">お問い合わせ</a>
+      </div>
+    </div>
+    <p>&copy; 2026 HappyWater Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <div class="mobile-cta-inner">
+    <a href="tel:0120987654" class="call">📞 電話で申込</a>
+    <a href="#apply" class="apply">今すぐ無料お申込み</a>
+  </div>
+</div>
+
+<script>
+  // reveal on scroll
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  // price simulator
+  var tabs = document.querySelectorAll('.price-tab');
+  var priceValue = document.getElementById('priceValue');
+  var priceBottles = document.getElementById('priceBottles');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      var monthly = Number(tab.getAttribute('data-monthly')).toLocaleString('ja-JP');
+      priceValue.innerHTML = monthly + '<span>円（税込）</span>';
+      priceBottles.textContent = tab.getAttribute('data-bottles');
+    });
+  });
+</script>
+
+</body>
+</html>
