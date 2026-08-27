@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect x="0" y="0" width="800" height="500" fill="#EDF3FC"/>
+  <rect x="6" y="6" width="788" height="488" fill="none" stroke="#B9C7DC" stroke-width="3" stroke-dasharray="10 8" rx="10"/>
+  <g transform="translate(376, 194)" stroke="#8FA3BE" stroke-width="2.2" fill="none">
+    <rect x="0" y="0" width="48" height="40" rx="5"/>
+    <circle cx="14" cy="13" r="4"/>
+    <path d="M48 30 L34 16 L22 28 L14 20 L0 34" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="50%" y="280" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="20" font-weight="700" fill="#5C6B7C">torcia（トルチャ）</text>
+  <text x="50%" y="306" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="16" fill="#8B99AC">公式サイトFV差し替え予定</text>
+</svg>

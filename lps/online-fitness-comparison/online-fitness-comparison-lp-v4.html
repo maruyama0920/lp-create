@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>オンラインフィットネス</title>
+<meta name="description" content="ジムに通わなくても、続けられる？自宅でできるオンラインフィットネスを料金・レッスン内容・続けやすさで徹底比較。あなたにぴったりのサービスが見つかります。">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-alt: #F5F8FD;
+    --color-bg-soft: #EDF3FC;
+    --color-text: #17222E;
+    --color-text-muted: #5C6B7C;
+    --color-primary: #229CC2;
+    --color-primary-dark: #176F87;
+    --color-primary-soft: #E7F5F9;
+    --color-gold: #E8A916;
+    --color-silver: #9AA6B2;
+    --color-bronze: #C1793F;
+    --color-border: #E1E8F1;
+    --color-rank-gray: #7C93C4;
+    --color-score: #E5484D;
+    --color-good: #17A374;
+    --color-card-bg: #ffffff;
+    --color-header-bg: rgba(255,255,255,0.96);
+    --shadow-card: 0 8px 24px rgba(34, 156, 194, 0.08);
+    --shadow-cta: 0 10px 24px rgba(34, 156, 194, 0.28);
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 8px;
+  }
+  :root[data-theme="dark"] {
+    --color-bg: #0D1520;
+    --color-bg-alt: #111A28;
+    --color-bg-soft: #15202F;
+    --color-text: #E9F0FA;
+    --color-text-muted: #9CADC0;
+    --color-primary: #5CC0DE;
+    --color-primary-dark: #3D9DBB;
+    --color-primary-soft: #16323C;
+    --color-gold: #F0BE4C;
+    --color-border: #22303F;
+    --color-card-bg: #151F2D;
+    --color-header-bg: rgba(13,21,32,0.92);
+    --shadow-card: 0 8px 24px rgba(0,0,0,0.35);
+    --shadow-cta: 0 10px 24px rgba(34, 156, 194, 0.22);
+    --color-rank-gray: #6F87B8;
+    --color-score: #FF6B70;
+    --color-good: #34D399;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --color-bg: #0D1520;
+      --color-bg-alt: #111A28;
+      --color-bg-soft: #15202F;
+      --color-text: #E9F0FA;
+      --color-text-muted: #9CADC0;
+      --color-primary: #5CC0DE;
+      --color-primary-dark: #3D9DBB;
+      --color-primary-soft: #16323C;
+      --color-gold: #F0BE4C;
+      --color-border: #22303F;
+      --color-card-bg: #151F2D;
+      --color-header-bg: rgba(13,21,32,0.92);
+      --shadow-card: 0 8px 24px rgba(0,0,0,0.35);
+      --shadow-cta: 0 10px 24px rgba(34, 156, 194, 0.22);
+      --color-rank-gray: #6F87B8;
+      --color-score: #FF6B70;
+    --color-good: #34D399;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  .band { padding: 64px 0; }
+  .band-alt { background: var(--color-bg-alt); }
+  .band-soft { background: var(--color-bg-soft); }
+  h1, h2, h3, h4 { margin: 0; font-weight: 800; }
+
+  /* section tag (replaces old numbering) */
+  .section-tag {
+    display: inline-flex; align-items: center; justify-content: center; margin: 0 auto 14px;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--color-primary); background: var(--color-primary-soft);
+    padding: 7px 18px; border-radius: 999px; text-align: center;
+  }
+  .section-tag-wrap { text-align: center; }
+  .section-title { font-size: clamp(22px, 4vw, 32px); text-align: center; margin-bottom: 10px; }
+  .section-sub { text-align: center; color: var(--color-text-muted); font-size: 15px; max-width: 640px; margin: 0 auto 40px; }
+  .note-box { font-size: 13px; color: var(--color-text-muted); text-align: left; }
+  .highlight { background: linear-gradient(transparent 60%, var(--color-gold) 60%); font-weight: 700; padding: 0 2px; opacity: 0.9; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* Header + hamburger */
+  header {
+    position: sticky; top: 0; z-index: 200;
+    background: var(--color-header-bg); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; max-width: 1000px; margin: 0 auto; gap: 16px;
+  }
+  .logo { font-size: 16px; font-weight: 700; color: var(--color-primary); display: flex; align-items: center; gap: 8px; }
+  .logo svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-weight: 700; border-radius: 999px; padding: 13px 28px; border: none;
+    cursor: pointer; font-size: 15px; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-cta { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: #fff; box-shadow: var(--shadow-cta); }
+  .btn-cta:hover { transform: translateY(-2px); }
+  .btn-cta-sm { padding: 9px 20px; font-size: 14px; white-space: nowrap; }
+  .btn-outline { background: transparent; border: 2px solid var(--color-primary); color: var(--color-primary); }
+  /* Link buttons — every "go see more" button gets a trailing chevron */
+  .btn::after {
+    content: "\203A"; font-weight: 900; line-height: 1;
+  }
+
+  .hamburger-btn {
+    display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 42px; height: 42px; border-radius: 10px; border: 1px solid var(--color-border);
+    background: var(--color-card-bg); cursor: pointer; flex-shrink: 0;
+  }
+  .hamburger-btn span { display: block; width: 20px; height: 2px; background: var(--color-text); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-panel {
+    position: fixed; top: 0; right: 0; height: 100vh; width: min(340px, 86vw);
+    background: var(--color-card-bg); box-shadow: -12px 0 32px rgba(0,0,0,0.18);
+    transform: translateX(100%); transition: transform 0.25s ease; z-index: 300;
+    padding: 24px; overflow-y: auto;
+  }
+  .nav-panel.open { transform: translateX(0); }
+  .nav-panel-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .nav-panel-close { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--color-border); background: none; cursor: pointer; font-size: 18px; color: var(--color-text-muted); }
+  .nav-links { display: grid; gap: 4px; }
+  .nav-links a {
+    padding: 13px 12px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 700;
+    color: var(--color-text); border-bottom: 1px solid var(--color-border);
+  }
+  .nav-links a:hover { background: var(--color-primary-soft); color: var(--color-primary); }
+  .nav-overlay {
+    position: fixed; inset: 0; background: rgba(10,16,24,0.4); z-index: 290;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+  }
+  .nav-overlay.open { opacity: 1; pointer-events: auto; }
+
+  /* Hero (photo FV) */
+  .hero { position: relative; min-height: 560px; display: flex; align-items: center; overflow: hidden; }
+  .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-scrim { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,20,35,0.78) 0%, rgba(10,20,35,0.55) 45%, rgba(10,20,35,0.2) 75%); }
+  .hero-inner { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; padding: 90px 24px; width: 100%; }
+  .hero-copy { max-width: 560px; color: #fff; }
+  .hero-copy .section-tag { background: rgba(255,255,255,0.16); color: #fff; }
+  .hero-title { font-size: clamp(26px, 4.2vw, 40px); line-height: 1.5; margin: 14px 0 16px; }
+  .hero-title em { font-style: normal; color: #8FB6FF; }
+  .hero-desc { font-size: 16px; color: rgba(255,255,255,0.88); margin-bottom: 26px; }
+  .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .hero-badge {
+    display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: 9px 16px;
+    font-size: 13px; font-weight: 700; color: #fff; backdrop-filter: blur(4px);
+  }
+  .hero-badge svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* Ranking cards */
+  .rank-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+  /* Pass-through wrappers on desktop/tablet — become real layout boxes only in the compact SP view below */
+  .rank-media, .rank-table, .rank-badge, .rank-right { display: contents; }
+  .rank-card {
+    position: relative; background: var(--color-card-bg); border: 1px solid var(--color-border);
+    border-radius: var(--radius-md); padding: 22px 10px 16px; text-align: center; box-shadow: var(--shadow-card);
+  }
+  .rank-card.top1 {
+    border: 2px solid transparent;
+    background-image: linear-gradient(var(--color-card-bg), var(--color-card-bg)), linear-gradient(135deg, #FFE49A 0%, #E8A916 55%, #B9780A 100%);
+    background-origin: border-box; background-clip: padding-box, border-box;
+  }
+
+  /* Rank crown badge — color communicates rank tier only, never brand/company */
+  .rank-crown {
+    position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+    width: 40px; height: 34px; display: flex; align-items: center; justify-content: center;
+    filter: drop-shadow(0 3px 4px rgba(17,34,46,0.18));
+  }
+  .rank-crown i { font-size: 30px; line-height: 1; }
+  .rank-crown.tier-gold { color: var(--color-gold); }
+  .rank-crown.tier-silver { color: var(--color-silver); }
+  .rank-crown.tier-bronze { color: var(--color-bronze); }
+  .rank-crown.tier-gray { color: var(--color-rank-gray); }
+  .rank-pos-label { margin-top: 2px; font-size: 15px; font-weight: 700; letter-spacing: 0.02em; }
+  .rank-pos-label.tier-gold {
+    background: linear-gradient(135deg, #FFE49A 0%, #E8A916 55%, #B9780A 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .rank-pos-label.tier-silver { color: var(--color-silver); }
+  .rank-pos-label.tier-bronze { color: var(--color-bronze); }
+  .rank-pos-label.tier-gray { color: var(--color-rank-gray); }
+
+  /* FV thumbnail — dummy placeholder images live in images/*.svg, swap the file to update */
+  .rank-avatar {
+    width: 100%; aspect-ratio: 16 / 10; margin: 0 0 10px; border-radius: var(--radius-sm); overflow: hidden;
+  }
+  .rank-avatar picture, .rank-avatar img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .rank-name-short { display: none; } /* full official name shown by default; short label swaps in on the compact SP card below */
+  .rank-name {
+    font-size: 15px; font-weight: 700; margin-bottom: 12px;
+    min-height: 40px; display: flex; align-items: center; justify-content: center; line-height: 1.3;
+  }
+  .rank-row { padding: 10px 0; border-top: 1px dashed var(--color-border); }
+  .rank-row .rank-row-label { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 13px; color: var(--color-text-muted); font-weight: 700; margin-bottom: 4px; }
+  .rank-row .rank-row-label svg { width: 13px; height: 13px; }
+  .rank-row .rank-row-label i { font-size: 13px; line-height: 1; }
+  .rank-row .rank-row-value { font-size: 15px; font-weight: 700; }
+  .rank-stars {
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #FFE49A 0%, #E8A916 55%, #B9780A 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .rank-score { color: var(--color-score); font-size: 15px; font-weight: 700; margin-left: 2px; }
+  .rank-sym { display: block; font-size: 30px; line-height: 1; margin: 4px 0; }
+  .rank-sym.great { color: var(--color-score); }
+  .rank-sym.good { color: var(--color-good); }
+  .rank-sym.caution { color: var(--color-good); }
+  .rank-sym.bad { color: var(--color-primary); }
+  .rank-row .rank-row-comment { font-size: 13px; color: var(--color-text-muted); margin-top: 4px; line-height: 1.4; min-height: 36px; }
+  .rank-highlight { display: none; } /* shown only in the compact SP layout below — "why this rank" one-liner */
+  .rank-footnote { text-align: center; font-size: 13px; color: var(--color-text-muted); margin-top: 20px; }
+
+  /* Diagnosis */
+  .diag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .diag-card { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 26px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; }
+  .diag-card .diag-letter {
+    display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+    border-radius: 50%; background: var(--color-primary-soft); color: var(--color-primary); font-weight: 700; margin-bottom: 10px;
+  }
+  .diag-card .diag-type-name { font-size: 13px; font-weight: 700; color: var(--color-primary); margin-bottom: 6px; }
+  .diag-card h3 { font-size: 15px; margin-bottom: 10px; }
+  .diag-card p { font-size: 15px; color: var(--color-text-muted); margin: 0 0 14px; flex-grow: 1; }
+  .diag-result { font-size: 15px; font-weight: 700; color: var(--color-text); margin-bottom: 0; }
+
+  /* Type explain */
+  .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .type-card { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; }
+  .type-card h3 { font-size: 15px; margin-bottom: 12px; color: var(--color-primary); }
+  .type-row { font-size: 15px; margin-bottom: 8px; }
+  .type-row b { color: var(--color-text); }
+  .type-row.merit { color: var(--color-text-muted); }
+
+  /* Simulator table */
+  .sim-table-wrap { overflow-x: auto; }
+  table.sim { width: 100%; border-collapse: collapse; min-width: 640px; background: var(--color-card-bg); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); }
+  table.sim th, table.sim td { padding: 14px; text-align: center; border-bottom: 1px solid var(--color-border); font-size: 15px; }
+  table.sim thead th { background: var(--color-bg-soft); }
+  table.sim th:first-child, table.sim td:first-child { text-align: left; font-weight: 700; }
+  .col-champion { background: var(--color-primary-soft); font-weight: 700; }
+
+  /* vs table (youtube / gym) */
+  .vs-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; }
+  .vs-col { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; }
+  .vs-col h3 { text-align: center; margin-bottom: 16px; font-size: 16px; }
+  .vs-col ul { margin: 0; padding-left: 20px; font-size: 15px; color: var(--color-text-muted); display: grid; gap: 8px; }
+  .vs-divider { font-size: 20px; font-weight: 700; color: var(--color-primary); }
+
+  /* Services band heading (banner style) */
+  .band-heading {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: #fff; text-align: center; padding: 34px 24px; border-radius: var(--radius-lg); margin-bottom: 40px;
+  }
+  .band-heading .section-tag { background: rgba(255,255,255,0.18); color: #fff; margin-bottom: 10px; }
+  .band-heading h2 { font-size: clamp(22px, 4vw, 30px); color: #fff; margin-bottom: 8px; }
+  .band-heading p { color: rgba(255,255,255,0.85); font-size: 15px; margin: 0; }
+
+  /* LEAN BODY (1位) detail — compare-card style */
+  .lb-card {
+    background: var(--color-card-bg); border-radius: var(--radius-lg);
+    padding: 40px 28px; margin-bottom: 28px; filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.05));
+  }
+
+  /* コンテンツ①上段: バッジ＋社名＋総合評価＋公式リンク（参考サイト構造、社名色のみ自サイトカラー） */
+  .lb-top { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+  .lb-rank-badge { width: 110px; height: 110px; flex-shrink: 0; }
+  .lb-top-info { flex: 1; min-width: 200px; display: flex; flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 20px; }
+  .lb-top-name { font-size: 40px; font-weight: 800; color: var(--color-primary); line-height: 1.25; word-break: keep-all; overflow-wrap: break-word; }
+  .lb-top-name span { font-size: 17px; font-weight: 700; color: var(--color-text-muted); margin-left: 6px; }
+  .lb-top-rating { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .lb-top-rating-label {
+    font-size: 20px; font-weight: 700; color: #fff; background: #FF2B7F;
+    padding: 5px 10px; border-radius: 6px;
+  }
+  .lb-top-rating .rank-stars { font-size: 25px; }
+  .lb-top-rating .rank-score { font-size: 25px; }
+
+  /* コンテンツ①中段: 画像＋良い点4つ（参考サイト構造、チェック色のみ自サイトカラー） */
+  .lb-mid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 20px; align-items: stretch; padding-top: 20px; border-top: 1px solid var(--color-border); }
+  .lb-mid.lb-mid--wide-features { grid-template-columns: 40% 60%; } /* 特徴説明が長いサービスはこの修飾クラスを追加して手動調整 */
+  .lb-mid-image { min-width: 0; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); }
+  .lb-mid-image picture, .lb-mid-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .lb-mid-features { min-width: 0; display: flex; flex-direction: column; justify-content: center; }
+  .lb-mid-features ul { list-style: none; margin: 0; padding: 0; }
+  .lb-mid-features li {
+    display: flex; align-items: center; gap: 10px; font-size: 17px; font-weight: 700; white-space: nowrap;
+    padding: 12px 0; border-top: 1px dashed var(--color-border);
+  }
+  .lb-mid-features li:first-child { border-top: none; padding-top: 0; }
+  .lb-mid-features li svg { width: 20px; height: 20px; color: var(--color-primary); flex-shrink: 0; }
+
+  /* コンテンツ①下段: 比較項目の表（参考サイト構造＝横並び、ヘッダー色のみ自サイトカラー） */
+  .lb-compare-table-wrap { overflow-x: auto; }
+  .lb-compare-table { width: 100%; min-width: 560px; border-collapse: separate; border-spacing: 0; margin-bottom: 8px; table-layout: fixed; }
+  .lb-compare-table th {
+    background: var(--color-primary); color: #fff; font-weight: 700; font-size: 13px;
+    padding: 12px 8px; text-align: center; border-right: 1px solid rgba(255,255,255,0.25);
+  }
+  .lb-compare-table th:last-child { border-right: none; }
+  .lb-compare-table td {
+    background: var(--color-card-bg); font-weight: 400; font-size: 15px; text-align: center;
+    padding: 16px 8px; border: 1px solid var(--color-border); border-top: none;
+  }
+  .lb-compare-note { font-size: 13px; color: var(--color-text-muted); margin: 0 0 24px; }
+  .lb-compare-grid { display: none; } /* SP専用の2列ラベル+値カード。@media(max-width:900px)で表示に切り替え */
+
+  /* コンテンツ①最下段: 向いている人（参考サイト準拠＝ピンク枠＋中央タイトルタブ） */
+  .lb-fit {
+    background: var(--color-card-bg); border: 2px solid #FF2B7F; border-radius: 20px;
+    padding: 30px 28px 26px; position: relative; margin-top: 14px;
+  }
+  .lb-fit-title {
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    background: var(--color-card-bg); padding: 0 14px;
+    display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  }
+  .lb-fit-title span { font-size: 17px; font-weight: 800; color: #FF2B7F; }
+  .lb-fit p { font-size: 15px; color: var(--color-text); margin: 0; line-height: 1.9; }
+  .lb-fit p strong { font-weight: 700; }
+  .lb-fit p mark {
+    background: linear-gradient(transparent 55%, #FFE45E 55%); color: var(--color-text);
+    font-weight: 700; padding: 0 1px;
+  }
+
+  /* コンテンツ②: 特徴カードグリッド（見出しなし・業種問わず汎用／レスポンシブ／枠・バッジはサイトのメインカラー） */
+  .lb-block-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 24px; margin-top: 40px; }
+  .lb-block {
+    position: relative; background: var(--color-card-bg); border: 2px solid var(--color-primary);
+    border-radius: var(--radius-lg); padding: 34px 24px 26px; box-shadow: var(--shadow-card);
+  }
+  .lb-block-badge {
+    position: absolute; top: -17px; left: 50%; transform: translateX(-50%);
+    background: var(--color-primary); border: 1.5px solid var(--color-primary); color: #ffffff;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.5px; line-height: 1;
+    padding: 8px 22px; border-radius: 999px; white-space: nowrap; box-shadow: 0 3px 8px rgba(34,156,194,0.3);
+  }
+  .lb-block-head { text-align: center; margin-bottom: 20px; }
+  .lb-block-lead { display: block; font-size: 15px; font-weight: 700; color: var(--color-text-muted); line-height: 1.3; margin-bottom: 2px; }
+  .lb-block-title { display: block; font-size: 19px; font-weight: 800; color: var(--color-primary); line-height: 1.3; }
+  .lb-block-img { border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); aspect-ratio: 4 / 3; margin-bottom: 16px; }
+  .lb-block-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .lb-block-body p { font-size: 15px; color: var(--color-text-muted); margin: 0; line-height: 1.7; }
+
+  /* コンテンツ③: CTA（1位のみ／参考サイトcta-areaの色・アイコン・シャドー・サイズを流用、PC/SPはCSSのみで対応） */
+  .lb-cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 28px; }
+  .lb-cta-btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    flex: 1 1 260px; max-width: 460px; background: #F20544; color: #fff;
+    border-radius: 999px; padding: 18px 22px; box-shadow: 0 6px 6px rgba(0,0,0,0.15);
+    font-size: 18px; font-weight: 700; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .lb-cta-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 14px rgba(0,0,0,0.22); }
+  .lb-cta-ico {
+    display: grid; place-items: center; flex-shrink: 0; width: 40px; height: 40px;
+    border-radius: 999px; background: #fff; color: #F20544; font-size: 18px;
+  }
+  .lb-cta-text { flex: 1; text-align: center; }
+  .lb-cta-arrow { display: grid; place-items: center; flex-shrink: 0; }
+  .lb-cta-arrow svg { width: 22px; height: 22px; }
+
+  /* purpose */
+  .purpose-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .purpose-item { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 18px; font-size: 15px; }
+  .purpose-item .q { font-weight: 700; margin-bottom: 6px; }
+  .purpose-item .a { color: var(--color-primary); font-weight: 700; }
+
+  /* reason list */
+  .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .reason-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 16px 18px; font-size: 15px; }
+  .reason-item .arrow { color: var(--color-primary); font-weight: 700; white-space: nowrap; }
+
+  /* compare big table */
+  .compare-wrap { overflow-x: auto; }
+  table.compare { width: 100%; border-collapse: collapse; min-width: 720px; background: var(--color-card-bg); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); }
+  table.compare th, table.compare td { padding: 15px; text-align: center; border-bottom: 1px solid var(--color-border); font-size: 15px; }
+  table.compare thead th { background: var(--color-bg-soft); }
+  table.compare th:first-child, table.compare td:first-child { text-align: left; color: var(--color-text-muted); font-weight: 600; }
+
+  /* time select */
+  .time-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
+  .time-tab { border: 2px solid var(--color-border); background: var(--color-card-bg); border-radius: 999px; padding: 9px 20px; font-weight: 700; font-size: 14px; cursor: pointer; color: var(--color-text-muted); }
+  .time-tab.active { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-soft); }
+  .time-result { max-width: 560px; margin: 0 auto; background: var(--color-card-bg); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); border: 1px solid var(--color-border); padding: 30px; text-align: center; font-size: 15px; }
+  .time-result .rec { font-size: 20px; font-weight: 800; color: var(--color-primary); margin: 8px 0; }
+
+  /* point list */
+  .point-list { display: grid; gap: 16px; }
+  .point-item { display: flex; gap: 16px; align-items: flex-start; background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 18px 20px; }
+  .point-item .point-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--color-primary); color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .point-item p { margin: 4px 0 0; font-size: 15px; color: var(--color-text-muted); }
+
+  /* FAQ */
+  .faq-item { border-bottom: 1px solid var(--color-border); }
+  .faq-item summary {
+    cursor: pointer; list-style: none; padding: 14px 16px; font-weight: 700; display: flex; align-items: center;
+    justify-content: space-between; font-size: 15px; color: var(--color-primary);
+    background: var(--color-card-bg); border-radius: var(--radius-sm); margin: 8px 8px 8px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; font-size: 20px; color: var(--color-primary); transition: transform 0.2s ease; margin-left: 12px; }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-q { display: flex; align-items: center; gap: 10px; }
+  .faq-num { flex-shrink: 0; font-weight: 800; color: var(--color-primary); }
+  .faq-item .faq-a {
+    display: flex; align-items: flex-start; gap: 10px; background: var(--color-bg-alt);
+    border-radius: var(--radius-sm); margin: 0 8px 18px; padding: 14px 16px;
+    color: var(--color-text-muted); font-size: 15px;
+  }
+  .faq-num-a {
+    flex-shrink: 0; font-weight: 800; color: #fff; background: var(--color-primary);
+    padding: 2px 8px; border-radius: 6px; font-size: 13px; line-height: 1.6;
+  }
+
+  footer { background: var(--color-bg-alt); padding: 44px 0 90px; font-size: 13px; color: var(--color-text-muted); }
+  .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-bottom: 20px; }
+  .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  @media (max-width: 900px) {
+    .vs-grid, .diag-grid, .type-grid, .reason-grid, .purpose-grid, .lb-mid, .lb-block-grid { grid-template-columns: 1fr; }
+    .lb-mid-features li { white-space: normal; }
+    .vs-divider { text-align: center; }
+    .rank-cards { grid-template-columns: repeat(2, 1fr); }
+    .band { padding: 48px 0; }
+    .hero-inner { padding: 64px 24px; }
+
+    /* コンテンツ①下段の比較表: SPはPC版tableを隠し、div構成の2列ラベル+値カードに切り替え */
+    .lb-compare-table-wrap { display: none; }
+    .lb-compare-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--color-border);
+      border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .lb-compare-cell { background: var(--color-card-bg); padding: 0 8px 14px; text-align: center; font-size: 15px; }
+    .lb-compare-cell-label {
+      display: block; background: var(--color-primary); color: #fff;
+      font-weight: 700; font-size: 13px; padding: 8px 6px; margin: 0 -8px 10px;
+    }
+  }
+  @media (max-width: 560px) {
+    .rank-cards { grid-template-columns: 1fr; }
+
+    /* Compact ranking card — left column (crown+number / image / name), right column (highlight / 3-col table / button) */
+    .rank-card { display: flex; flex-direction: row; align-items: stretch; text-align: center; padding: 14px; gap: 12px; }
+    .rank-media { display: flex; flex-direction: column; align-items: center; flex: 0 0 108px; width: 108px; }
+    .rank-badge { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 5px; min-height: 34px; margin-bottom: 8px; }
+
+    .rank-crown { position: static; width: 20px; height: 17px; margin: 0; filter: none; }
+    .rank-crown i { font-size: 18px; }
+    .rank-pos-label { margin: 0; font-size: 19px; line-height: 1; }
+    .rank-avatar { width: 100%; aspect-ratio: 1 / 1; margin: 0 0 8px; }
+    .rank-name {
+      width: 100%; text-align: center; font-size: 13px; line-height: 1.3; margin-bottom: 0;
+      height: 47px; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .rank-name-full { display: none; }
+    .rank-name-short { display: inline; }
+    .rank-row--satisfaction { display: none; }
+
+    .rank-right { display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 0; }
+    .rank-highlight {
+      display: block; font-size: 13px; font-weight: 700; color: var(--color-primary-dark);
+      background: var(--color-primary-soft); border-radius: 6px; padding: 7px 8px;
+      margin-bottom: 8px; line-height: 1.3; text-align: center;
+    }
+    .rank-table {
+      display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; width: 100%; margin-bottom: 10px;
+      border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; text-align: center;
+    }
+    .rank-table .rank-row { padding: 0 0 10px; border-top: none; border-right: 1px solid var(--color-border); }
+    .rank-table .rank-row:last-child { border-right: none; }
+    .rank-table .rank-row-label {
+      background: var(--color-primary); color: #fff; margin: 0 0 8px; padding: 8px 2px;
+      font-size: 12px; justify-content: center; gap: 0; border-radius: 0; line-height: 1.2;
+    }
+    .rank-table .rank-row-label i, .rank-table .rank-row-label svg { display: none; }
+    .rank-table .rank-sym { font-size: 26px; margin: 0 0 4px; text-align: center; }
+    .rank-table .rank-row-value { font-size: 13px; padding: 0 2px; text-align: center; line-height: 1.25; }
+    .rank-table .rank-row-comment { display: none; }
+
+    .lb-cta-row { flex-direction: column; gap: 14px; }
+    .lb-cta-btn { flex-basis: auto; max-width: none; padding: 14px 18px; gap: 12px; font-size: 15px; }
+    .lb-cta-ico { width: 32px; height: 32px; font-size: 15px; }
+    .lb-cta-arrow { font-size: 15px; }
+
+    .lb-card { padding: 24px 18px; }
+    .lb-top { gap: 14px; }
+    .lb-rank-badge { width: 72px; height: 72px; }
+    .lb-top-name { font-size: 20px; line-height: 1.35; }
+    .lb-top-name span { font-size: 13px; }
+    .lb-top-rating-label { font-size: 14px; padding: 4px 8px; }
+    .lb-top-rating .rank-stars { font-size: 16px; }
+    .lb-top-rating .rank-score { font-size: 16px; }
+  }
+  @media (max-width: 480px) {
+    .logo { font-size: 13px; }
+    .header-right .btn-cta-sm { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/><path d="M8 12l2.5 2.5L16 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      オンラインフィットネス徹底比較ガイド
+    </div>
+    <div class="header-right">
+      <a href="#service-leanbody" class="btn btn-cta btn-cta-sm">総合1位を見る</a>
+      <button class="hamburger-btn" id="hamburgerBtn" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-panel" id="navPanel">
+  <div class="nav-panel-head">
+    <strong>メニュー</strong>
+    <button class="nav-panel-close" id="navPanelClose">×</button>
+  </div>
+  <div class="nav-links">
+    <a href="#ranking">おすすめTOP5ランキング</a>
+    <a href="#types">3タイプの違い</a>
+    <a href="#simulator">1回あたり料金で比較</a>
+    <a href="#youtube">無料のYouTubeとの違い</a>
+    <a href="#diagnosis">3タイプ診断</a>
+    <a href="#services">5社を1社ずつ紹介</a>
+    <a href="#points">選び方5ポイント</a>
+    <a href="#faq">よくある質問</a>
+    <a href="#time">空き時間で選ぶ</a>
+    <a href="#reasons">続かない原因から選ぶ</a>
+    <a href="#exercise-only">運動＋食事＋記録で比較</a>
+    <a href="#purpose">目的・生活スタイル別</a>
+    <a href="#gym-vs-online">ジム vs オンライン</a>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <img class="hero-photo" src="images/hero-fv.png" alt="自宅でタブレットのオンラインフィットネス動画を見ながらヨガのストレッチをする女性">
+  <div class="hero-scrim"></div>
+  <div class="hero-inner">
+    <div class="hero-copy reveal">
+      <span class="section-tag">2026年最新版比較ガイド</span>
+      <h1 class="hero-title">ジムに通わなくても、<br><em>続けられる？</em><br>自宅でできるオンラインフィットネス徹底比較</h1>
+      <p class="hero-desc">料金・レッスン内容・続けやすさをまとめて比較。あなたにぴったりのサービスがきっと見つかります。</p>
+      <div class="hero-badges">
+        <div class="hero-badge"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1.6"/></svg>自宅で完結</div>
+        <div class="hero-badge"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.6"/></svg>月額数百円から</div>
+        <div class="hero-badge"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>初心者でも始めやすい</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="ranking">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">RANKING</span></div>
+    <h2 class="section-title reveal">オンラインフィットネス おすすめTOP5</h2>
+    <p class="section-sub reveal">総合評価・料金・レッスン数・続けやすさをもとにランキング化しました。</p>
+
+    <div class="rank-cards reveal">
+      <div class="rank-card top1 tier-gold">
+        <div class="rank-media">
+          <div class="rank-badge">
+            <div class="rank-crown tier-gold"><i class="fas fa-crown"></i></div>
+            <div class="rank-pos-label tier-gold">1位</div>
+          </div>
+          <div class="rank-avatar">
+            <picture>
+              <source srcset="images/leanbody-fv-sp.svg" media="(max-width: 767px)">
+              <img src="images/leanbody-fv.svg" alt="LEAN BODY 公式サイトFV（差し替え予定）">
+            </picture>
+          </div>
+          <div class="rank-name">LEAN BODY<br>（リーンボディ）</div>
+        </div>
+        <div class="rank-row rank-row--satisfaction"><div class="rank-row-label"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/></svg>総合満足度</div><div class="rank-row-value"><span class="rank-stars">★★★★★</span><span class="rank-score">5.0</span></div><div class="rank-row-comment">1,000本以上の動画で満足度No.1</div></div>
+        <div class="rank-right">
+          <div class="rank-highlight">総合満足度 <span class="rank-stars">★★★★★</span><span class="rank-score">5.0</span></div>
+          <div class="rank-table">
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-yen-sign"></i>料金</div><span class="rank-sym good">○</span><div class="rank-row-value">1,628円〜</div><div class="rank-row-comment">年間プランで最安クラス</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-layer-group"></i>タイプ</div><span class="rank-sym great">◎</span><div class="rank-row-value">ハイブリッド型</div><div class="rank-row-comment">オンデマンド中心＋LIVEも</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-utensils"></i>食事管理</div><span class="rank-sym great">◎</span><div class="rank-row-value">あり</div><div class="rank-row-comment">体重・食事・運動をまとめて記録</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rank-card tier-silver">
+        <div class="rank-media">
+          <div class="rank-badge">
+            <div class="rank-crown tier-silver"><i class="fas fa-crown"></i></div>
+            <div class="rank-pos-label tier-silver">2位</div>
+          </div>
+          <div class="rank-avatar">
+            <picture>
+              <source srcset="images/renaissance-fv-sp.svg" media="(max-width: 767px)">
+              <img src="images/renaissance-fv.svg" alt="ルネサンス オンライン Livestream 公式サイトFV（差し替え予定）">
+            </picture>
+          </div>
+          <div class="rank-name">
+            <span class="rank-name-full">ルネサンスオンライン<br>Livestream</span>
+            <span class="rank-name-short">ルネサンス<br>オンライン</span>
+          </div>
+        </div>
+        <div class="rank-row rank-row--satisfaction"><div class="rank-row-label"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/></svg>総合満足度</div><div class="rank-row-value"><span class="rank-stars">★★★★☆</span><span class="rank-score">4.5</span></div><div class="rank-row-comment">大手ジム品質のレッスン多数</div></div>
+        <div class="rank-right">
+          <div class="rank-highlight">総合満足度 <span class="rank-stars">★★★★☆</span><span class="rank-score">4.5</span></div>
+          <div class="rank-table">
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-yen-sign"></i>料金</div><span class="rank-sym great">◎</span><div class="rank-row-value">1,100円〜</div><div class="rank-row-comment">お試しやすい価格帯</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-layer-group"></i>タイプ</div><span class="rank-sym caution">△</span><div class="rank-row-value">スタジオ型</div><div class="rank-row-comment">見逃し配信もあり</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-utensils"></i>食事管理</div><span class="rank-sym bad">×</span><div class="rank-row-value">なし</div><div class="rank-row-comment">専用の食事管理機能はなし</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rank-card tier-bronze">
+        <div class="rank-media">
+          <div class="rank-badge">
+            <div class="rank-crown tier-bronze"><i class="fas fa-crown"></i></div>
+            <div class="rank-pos-label tier-bronze">3位</div>
+          </div>
+          <div class="rank-avatar">
+            <picture>
+              <source srcset="images/247-fv-sp.svg" media="(max-width: 767px)">
+              <img src="images/247-fv.svg" alt="24/7 Online Fitness 公式サイトFV（差し替え予定）">
+            </picture>
+          </div>
+          <div class="rank-name">24/7<br>Online Fitness</div>
+        </div>
+        <div class="rank-row rank-row--satisfaction"><div class="rank-row-label"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/></svg>総合満足度</div><div class="rank-row-value"><span class="rank-stars">★★★★☆</span><span class="rank-score">4.3</span></div><div class="rank-row-comment">双方向ライブで質問しやすい</div></div>
+        <div class="rank-right">
+          <div class="rank-highlight">総合満足度 <span class="rank-stars">★★★★☆</span><span class="rank-score">4.3</span></div>
+          <div class="rank-table">
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-yen-sign"></i>料金</div><span class="rank-sym caution">△</span><div class="rank-row-value">3,278円〜</div><div class="rank-row-comment">マンツーマン感覚が魅力</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-layer-group"></i>タイプ</div><span class="rank-sym caution">△</span><div class="rank-row-value">スタジオ型</div><div class="rank-row-comment">スケジュール制ライブ</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-utensils"></i>食事管理</div><span class="rank-sym caution">△</span><div class="rank-row-value">一部対応</div><div class="rank-row-comment">運動記録が中心</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rank-card tier-gray">
+        <div class="rank-media">
+          <div class="rank-badge">
+            <div class="rank-crown tier-gray"><i class="fas fa-crown"></i></div>
+            <div class="rank-pos-label tier-gray">4位</div>
+          </div>
+          <div class="rank-avatar">
+            <picture>
+              <source srcset="images/konami-fv-sp.svg" media="(max-width: 767px)">
+              <img src="images/konami-fv.svg" alt="コナミスポーツクラブ オンラインフィットネス 公式サイトFV（差し替え予定）">
+            </picture>
+          </div>
+          <div class="rank-name">
+            <span class="rank-name-full">コナミスポーツクラブ<br>オンラインフィットネス</span>
+            <span class="rank-name-short">コナミ<br>スポーツクラブ</span>
+          </div>
+        </div>
+        <div class="rank-row rank-row--satisfaction"><div class="rank-row-label"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/></svg>総合満足度</div><div class="rank-row-value"><span class="rank-stars">★★★★☆</span><span class="rank-score">4.0</span></div><div class="rank-row-comment">本格プログラムが自宅で</div></div>
+        <div class="rank-right">
+          <div class="rank-highlight">総合満足度 <span class="rank-stars">★★★★☆</span><span class="rank-score">4.0</span></div>
+          <div class="rank-table">
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-yen-sign"></i>料金</div><span class="rank-sym great">◎</span><div class="rank-row-value">1,078円〜</div><div class="rank-row-comment">利用回数でプラン選択可</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-layer-group"></i>タイプ</div><span class="rank-sym caution">△</span><div class="rank-row-value">スポーツクラブ型</div><div class="rank-row-comment">経験豊富な指導者陣</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-utensils"></i>食事管理</div><span class="rank-sym bad">×</span><div class="rank-row-value">なし</div><div class="rank-row-comment">食事管理機能はなし</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rank-card tier-gray">
+        <div class="rank-media">
+          <div class="rank-badge">
+            <div class="rank-crown tier-gray"><i class="fas fa-crown"></i></div>
+            <div class="rank-pos-label tier-gray">5位</div>
+          </div>
+          <div class="rank-avatar">
+            <picture>
+              <source srcset="images/torcia-fv-sp.svg" media="(max-width: 767px)">
+              <img src="images/torcia-fv.svg" alt="torcia（トルチャ）公式サイトFV（差し替え予定）">
+            </picture>
+          </div>
+          <div class="rank-name">torcia<br>（トルチャ）</div>
+        </div>
+        <div class="rank-row rank-row--satisfaction"><div class="rank-row-label"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/></svg>総合満足度</div><div class="rank-row-value"><span class="rank-stars">★★★★☆</span><span class="rank-score">3.8</span></div><div class="rank-row-comment">ジャンルの多彩さが強み</div></div>
+        <div class="rank-right">
+          <div class="rank-highlight">総合満足度 <span class="rank-stars">★★★★☆</span><span class="rank-score">3.8</span></div>
+          <div class="rank-table">
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-yen-sign"></i>料金</div><span class="rank-sym bad">×</span><div class="rank-row-value">4,378円〜</div><div class="rank-row-comment">都度払いプランもあり</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-layer-group"></i>タイプ</div><span class="rank-sym good">○</span><div class="rank-row-value">オンデマンド型</div><div class="rank-row-comment">ダンス・格闘技系も豊富</div></div>
+            <div class="rank-row"><div class="rank-row-label"><i class="fas fa-utensils"></i>食事管理</div><span class="rank-sym bad">×</span><div class="rank-row-value">なし</div><div class="rank-row-comment">食事管理機能はなし</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="rank-footnote reveal">※ 総合評価は当サイト独自の調査・比較に基づく評価です。料金・レッスン数は変更される場合があるため、必ず公式サイトで最新情報をご確認ください。</p>
+  </div>
+</section>
+
+<section class="band band-alt" id="types">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">TYPE GUIDE</span></div>
+    <h2 class="section-title reveal">オンラインフィットネス、結局どこが違う？</h2>
+    <p class="section-sub reveal">実はオンラインフィットネスは大きく3タイプに分かれます。</p>
+    <div class="type-grid">
+      <div class="type-card reveal">
+        <h3>①オンデマンド型</h3>
+        <div class="type-row"><b>好きな時間に好きなだけ</b></div>
+        <div class="type-row merit">メリット：時間に縛られない</div>
+        <div class="type-row merit">デメリット：自分で続ける意志が必要</div>
+        <div class="type-row">代表：LEAN BODY</div>
+      </div>
+      <div class="type-card reveal">
+        <h3>②オンラインスタジオ型</h3>
+        <div class="type-row"><b>決まった時間にLIVE参加</b></div>
+        <div class="type-row merit">メリット：運動する時間が決まりやすい</div>
+        <div class="type-row merit">デメリット：時間の自由度は低くなる</div>
+        <div class="type-row">代表：ルネサンス / 24/7</div>
+      </div>
+      <div class="type-card reveal">
+        <h3>③スポーツクラブ型</h3>
+        <div class="type-row"><b>ジム品質のプログラムを自宅で</b></div>
+        <div class="type-row merit">メリット：本格的なプログラム</div>
+        <div class="type-row merit">デメリット：ライトユーザーにはオーバースペックな場合も</div>
+        <div class="type-row">代表：コナミ</div>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top:24px;">LEAN BODYは①を中心にLIVEも利用できる「ハイブリッド型」と言えます。</p>
+  </div>
+</section>
+
+<section class="band" id="simulator">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">料金シミュレーション</span></div>
+    <h2 class="section-title reveal">【独自企画①】月額料金より、「1回あたり」で考えてみる</h2>
+    <p class="section-sub reveal">月2,000円でも使わなければ高い。月2,000円を20回使えば1回100円。という考え方です。</p>
+    <div class="sim-table-wrap reveal">
+      <table class="sim">
+        <thead>
+          <tr><th>利用頻度</th><th class="col-champion">LEAN BODY</th><th>ルネサンス</th><th>24/7</th><th>コナミ</th><th>torcia</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>週1回（月4回）</td><td class="col-champion">約407円</td><td>約275円</td><td>約820円</td><td>約270円</td><td>約1,095円</td></tr>
+          <tr><td>週3回（月12回）</td><td class="col-champion">約136円</td><td>約92円</td><td>約273円</td><td>約90円</td><td>約365円</td></tr>
+          <tr><td>毎日利用（月30回）</td><td class="col-champion">約61円</td><td>約64円</td><td>約164円</td><td>約64円</td><td>約219円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="rank-footnote">※ 各サービスの標準的な月額プランを利用回数で割った概算です。実際の料金体系はプランにより異なります。</p>
+  </div>
+</section>
+
+<section class="band band-soft" id="youtube">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">YouTube比較</span></div>
+    <h2 class="section-title reveal">無料のYouTubeじゃダメなの？</h2>
+    <div class="vs-grid">
+      <div class="vs-col reveal">
+        <h3>YouTube</h3>
+        <ul>
+          <li>○ 無料</li>
+          <li>○ 動画が非常に多い</li>
+          <li>△ レベル・目的から探しにくい場合も</li>
+          <li>△ 運動記録・食事管理は別途必要</li>
+        </ul>
+      </div>
+      <div class="vs-divider reveal">VS</div>
+      <div class="vs-col reveal">
+        <h3>オンラインフィットネス</h3>
+        <ul>
+          <li>△ 有料</li>
+          <li>○ 目的から探せる</li>
+          <li>○ プログラム化されている</li>
+          <li>○ 運動管理がやりやすい</li>
+          <li>○ サービスによってLIVEや対戦機能あり</li>
+        </ul>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top:24px;">LEAN BODYも無料FAQでYouTubeとの違いとして、時間・強度などから自分に合ったレッスンを探しやすい点を説明しています。</p>
+  </div>
+</section>
+
+<section class="band" id="diagnosis">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">3タイプ診断</span></div>
+    <h2 class="section-title reveal">「迷ったらコレ！」3タイプ診断</h2>
+    <p class="section-sub reveal">あなたはどのタイプ？ 当てはまるものを選んでみてください。</p>
+    <div class="diag-grid">
+      <div class="diag-card reveal">
+        <div class="diag-letter">A</div>
+        <div class="diag-type-name">隙間時間タイプ</div>
+        <h3>好きな時間にサクッと運動したい</h3>
+        <p>「今日は5分だけ」でもOK。動画は24時間見放題だから、隙間時間に自分のペースで続けられます。</p>
+        <div class="diag-result">おすすめ → LEAN BODY</div>
+      </div>
+      <div class="diag-card reveal">
+        <div class="diag-letter">B</div>
+        <div class="diag-type-name">みんなでがんばるタイプ</div>
+        <h3>決まった時間にみんなと運動したい</h3>
+        <p>LIVEレッスン中心で運動習慣を作りやすい。同じ時間に参加する仲間がいることでモチベーションが続きます。</p>
+        <div class="diag-result">おすすめ → ルネサンス / 24/7 Online Fitness</div>
+      </div>
+      <div class="diag-card reveal">
+        <div class="diag-letter">C</div>
+        <div class="diag-type-name">本格派タイプ</div>
+        <h3>スポーツクラブ品質を自宅で楽しみたい</h3>
+        <p>大手スポーツクラブのプログラムをオンラインで。経験豊富なインストラクターによる本格レッスンが魅力です。</p>
+        <div class="diag-result">おすすめ → コナミ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt" id="services">
+  <div class="container">
+    <div class="band-heading reveal">
+      <span class="section-tag">SERVICE GUIDE</span>
+      <h2>5サービスを1社ずつ詳しく紹介</h2>
+      <p>それぞれの特徴・メリット・注意点・口コミ・おすすめな人をまとめました。</p>
+    </div>
+
+    <div class="lb-card reveal" id="service-leanbody">
+
+      <!-- コンテンツ①上段：No.バッジ／社名／総合評価 -->
+      <div class="lb-top">
+        <img class="lb-rank-badge" src="images/ranking/no1.png" alt="総合1位">
+        <div class="lb-top-info">
+          <div class="lb-top-name">LEAN BODY<span>（リーンボディ）</span></div>
+          <div class="lb-top-rating"><span class="lb-top-rating-label">総合評価</span><span class="rank-stars">★★★★★</span><span class="rank-score">5.0</span></div>
+        </div>
+      </div>
+
+      <!-- コンテンツ①中段：画像／良い点4つ -->
+      <div class="lb-mid">
+        <div class="lb-mid-image">
+          <picture>
+            <source srcset="images/leanbody-fv-sp.svg" media="(max-width: 767px)">
+            <img src="images/leanbody-fv.svg" alt="LEAN BODY 公式サイトFV（差し替え予定）">
+          </picture>
+        </div>
+        <div class="lb-mid-features">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>1,000本以上のレッスンが見放題</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>食事記録で健康管理までサポート</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>5分から始められる自由度の高さ</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>2週間無料体験でリスクなく試せる</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- コンテンツ①下段：比較項目（記号なし、参考サイトと同じ横並び） -->
+      <div class="lb-compare-table-wrap">
+        <table class="lb-compare-table">
+          <tr>
+            <th>月額料金</th><th>無料体験</th><th>レッスン数</th><th>レッスン時間</th><th>食事管理</th><th>対応デバイス</th>
+          </tr>
+          <tr>
+            <td data-label="月額料金">1,628円〜<br>（12ヶ月プラン）</td><td data-label="無料体験">2週間</td><td data-label="レッスン数">1,000本以上</td><td data-label="レッスン時間">5分〜</td><td data-label="食事管理">記録機能あり</td><td data-label="対応デバイス">スマホ・PC<br>タブレット・テレビ</td>
+          </tr>
+        </table>
+      </div>
+      <div class="lb-compare-grid">
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">月額料金</span>1,628円〜<br>（12ヶ月プラン）</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">無料体験</span>2週間</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン数</span>1,000本以上</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン時間</span>5分〜</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">食事管理</span>記録機能あり</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">対応デバイス</span>スマホ・PC<br>タブレット・テレビ</div>
+      </div>
+      <p class="lb-compare-note">※12ヶ月プラン利用時の月あたり金額です。詳細・最新の料金は公式サイトでご確認ください。</p>
+
+      <!-- コンテンツ①最下段：向いている人 -->
+      <div class="lb-fit">
+        <div class="lb-fit-title">
+          <span>向いている人</span>
+        </div>
+        <p>忙しくて決まった時間の確保が難しい人、<strong>運動と一緒に食事管理もしたい人</strong>、色々なジャンルを試してみたい人に向いています。5分からの短時間レッスンと食事記録機能で、<mark>無理なく運動習慣を身につけたい方</mark>におすすめです。</p>
+      </div>
+
+      <!-- コンテンツ②：特徴カードグリッド（公式サイトの内容をリライトして掲載／見出しなしで業種問わず流用可） -->
+      <div class="lb-block-grid">
+        <div class="lb-block">
+          <span class="lb-block-badge">おすすめ①</span>
+          <div class="lb-block-head">
+            <span class="lb-block-lead">1,000本以上の</span>
+            <span class="lb-block-title">多彩なレッスン</span>
+          </div>
+          <div class="lb-block-img"><img src="images/feature-placeholder.svg" alt="1,000本以上の多彩なレッスン（差し替え予定）"></div>
+          <div class="lb-block-body">
+            <p>筋トレ・HIIT・カーディオといったトレーニング系から、ヨガ・瞑想・ダンスまで幅広いジャンルを配信。40名以上の有名インストラクターが監修し、話題の集中プログラムの独占配信も行っています。</p>
+          </div>
+        </div>
+        <div class="lb-block">
+          <span class="lb-block-badge">おすすめ②</span>
+          <div class="lb-block-head">
+            <span class="lb-block-lead">食事記録による</span>
+            <span class="lb-block-title">健康サポート機能</span>
+          </div>
+          <div class="lb-block-img"><img src="images/feature-placeholder.svg" alt="食事記録で健康管理までサポート（差し替え予定）"></div>
+          <div class="lb-block-body">
+            <p>毎日の食事を記録するだけで、カロリーや栄養バランスを簡単にチェックできます。日々のアドバイスも届くので、運動と合わせて食生活も無理なく整えられます。</p>
+          </div>
+        </div>
+        <div class="lb-block">
+          <span class="lb-block-badge">おすすめ③</span>
+          <div class="lb-block-head">
+            <span class="lb-block-lead">あなたにぴったりの</span>
+            <span class="lb-block-title">診断とプラン提案</span>
+          </div>
+          <div class="lb-block-img"><img src="images/feature-placeholder.svg" alt="あなたに合わせた診断とプラン提案（差し替え予定）"></div>
+          <div class="lb-block-body">
+            <p>簡単な診断に答えるだけで、目標体重や運動したい頻度に合わせたおすすめレッスンとプランを提案。ダイエット目的なら達成までの期間の目安も分かります。</p>
+          </div>
+        </div>
+        <div class="lb-block">
+          <span class="lb-block-badge">おすすめ④</span>
+          <div class="lb-block-head">
+            <span class="lb-block-lead">続ける工夫が</span>
+            <span class="lb-block-title">充実のサポート機能</span>
+          </div>
+          <div class="lb-block-img"><img src="images/feature-placeholder.svg" alt="継続をサポートする工夫が充実（差し替え予定）"></div>
+          <div class="lb-block-body">
+            <p>広告なしで集中でき、好きなレッスンのお気に入り登録やリマインド機能も搭載。バッジや修了証を集める仕組みで、楽しみながら続けられます。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- コンテンツ③：CTA（1位のみ設置） -->
+      <div class="lb-cta-row">
+        <a href="#" class="lb-cta-btn lb-cta-web">
+          <span class="lb-cta-ico"><i class="fas fa-envelope"></i></span>
+          <span class="lb-cta-text">メールで無料相談</span>
+          <span class="lb-cta-arrow"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a href="#" class="lb-cta-btn lb-cta-tel">
+          <span class="lb-cta-ico"><i class="fas fa-phone"></i></span>
+          <span class="lb-cta-text">電話で無料相談</span>
+          <span class="lb-cta-arrow"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="lb-card reveal" id="service-renaissance">
+      <div class="lb-top">
+        <img class="lb-rank-badge" src="images/ranking/no2.png" alt="総合2位">
+        <div class="lb-top-info">
+          <div class="lb-top-name">ルネサンス<br>オンライン Livestream</div>
+          <div class="lb-top-rating"><span class="lb-top-rating-label">総合評価</span><span class="rank-stars">★★★★☆</span><span class="rank-score">4.5</span></div>
+        </div>
+      </div>
+
+      <div class="lb-mid">
+        <div class="lb-mid-image">
+          <picture>
+            <source srcset="images/renaissance-fv-sp.svg" media="(max-width: 767px)">
+            <img src="images/renaissance-fv.svg" alt="ルネサンス オンライン Livestream 公式サイトFV（差し替え予定）">
+          </picture>
+        </div>
+        <div class="lb-mid-features">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>大手ジム品質の豊富なレッスンラインナップ</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>見逃し配信ありで生活リズムに合わせやすい</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>グループレッスンで励まし合いながら継続できる</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>大手ジムならではの安心感とサポート体制</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lb-compare-table-wrap">
+        <table class="lb-compare-table">
+          <tr>
+            <th>月額料金</th><th>無料体験</th><th>レッスン数</th><th>レッスン時間</th><th>食事管理</th><th>対応デバイス</th>
+          </tr>
+          <tr>
+            <td data-label="月額料金">1,100円〜</td><td data-label="無料体験">お試しプランあり</td><td data-label="レッスン数">週約900本</td><td data-label="レッスン時間">30分〜</td><td data-label="食事管理">なし</td><td data-label="対応デバイス">スマホ・PC<br>タブレット</td>
+          </tr>
+        </table>
+      </div>
+      <div class="lb-compare-grid">
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">月額料金</span>1,100円〜</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">無料体験</span>お試しプランあり</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン数</span>週約900本</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン時間</span>30分〜</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">食事管理</span>なし</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">対応デバイス</span>スマホ・PC<br>タブレット</div>
+      </div>
+      <p class="lb-compare-note">※料金・レッスン内容は変更される場合があります。詳細・最新の情報は公式サイトでご確認ください。</p>
+
+      <div class="lb-fit">
+        <div class="lb-fit-title">
+          <span>向いている人</span>
+        </div>
+        <p>大手ジムならではの<strong>安心感のあるプログラム</strong>で運動を続けたい人、一人だとサボりがちな人におすすめです。グループレッスン形式なので、<mark>周りと励まし合いながら継続したい方</mark>に向いています。</p>
+      </div>
+    </div>
+
+    <div class="lb-card reveal" id="service-247">
+      <div class="lb-top">
+        <img class="lb-rank-badge" src="images/ranking/no3.png" alt="総合3位">
+        <div class="lb-top-info">
+          <div class="lb-top-name">24/7 Online Fitness</div>
+          <div class="lb-top-rating"><span class="lb-top-rating-label">総合評価</span><span class="rank-stars">★★★★☆</span><span class="rank-score">4.3</span></div>
+        </div>
+      </div>
+
+      <div class="lb-mid">
+        <div class="lb-mid-image">
+          <picture>
+            <source srcset="images/247-fv-sp.svg" media="(max-width: 767px)">
+            <img src="images/247-fv.svg" alt="24/7 Online Fitness 公式サイトFV（差し替え予定）">
+          </picture>
+        </div>
+        <div class="lb-mid-features">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>双方向ライブでフォームを直接チェックしてもらえる</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>マンツーマン感覚に近い手厚いレッスン</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>正しいフォームが身につき自己流になりにくい</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>双方向のやり取りでモチベーションを維持しやすい</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lb-compare-table-wrap">
+        <table class="lb-compare-table">
+          <tr>
+            <th>月額料金</th><th>無料体験</th><th>レッスン数</th><th>レッスン時間</th><th>食事管理</th><th>対応デバイス</th>
+          </tr>
+          <tr>
+            <td data-label="月額料金">3,278円〜</td><td data-label="無料体験">無料体験レッスンあり</td><td data-label="レッスン数">ライブ1日1+動画見放題</td><td data-label="レッスン時間">30分〜</td><td data-label="食事管理">一部対応</td><td data-label="対応デバイス">スマホ・PC<br>タブレット</td>
+          </tr>
+        </table>
+      </div>
+      <div class="lb-compare-grid">
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">月額料金</span>3,278円〜</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">無料体験</span>無料体験レッスンあり</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン数</span>ライブ1日1+動画見放題</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン時間</span>30分〜</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">食事管理</span>一部対応</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">対応デバイス</span>スマホ・PC<br>タブレット</div>
+      </div>
+      <p class="lb-compare-note">※料金・レッスン内容は変更される場合があります。詳細・最新の情報は公式サイトでご確認ください。</p>
+
+      <div class="lb-fit">
+        <div class="lb-fit-title">
+          <span>向いている人</span>
+        </div>
+        <p>正しいフォームを身につけたい人、自己流のトレーニングに不安がある人に向いています。<strong>双方向ライブでその場でチェックしてもらえる</strong>ので、<mark>マンツーマン感覚で指導を受けたい方</mark>におすすめです。</p>
+      </div>
+    </div>
+
+    <div class="lb-card reveal" id="service-konami">
+      <div class="lb-top">
+        <img class="lb-rank-badge" src="images/ranking/no4.png" alt="総合4位">
+        <div class="lb-top-info">
+          <div class="lb-top-name">コナミスポーツクラブ<br>オンラインフィットネス</div>
+          <div class="lb-top-rating"><span class="lb-top-rating-label">総合評価</span><span class="rank-stars">★★★★☆</span><span class="rank-score">4.0</span></div>
+        </div>
+      </div>
+
+      <div class="lb-mid">
+        <div class="lb-mid-image">
+          <picture>
+            <source srcset="images/konami-fv-sp.svg" media="(max-width: 767px)">
+            <img src="images/konami-fv.svg" alt="コナミスポーツクラブ オンラインフィットネス 公式サイトFV（差し替え予定）">
+          </picture>
+        </div>
+        <div class="lb-mid-features">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>大手スポーツクラブの経験豊富なインストラクター</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>スタジオさながらの本格ライブレッスン</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>自宅にいながら通いなれた品質を体験できる</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>目的やレベルに合わせた豊富なプログラム</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lb-compare-table-wrap">
+        <table class="lb-compare-table">
+          <tr>
+            <th>月額料金</th><th>無料体験</th><th>レッスン数</th><th>レッスン時間</th><th>食事管理</th><th>対応デバイス</th>
+          </tr>
+          <tr>
+            <td data-label="月額料金">1,078円〜<br>3,850円</td><td data-label="無料体験">体験レッスンあり</td><td data-label="レッスン数">スタジオ品質多数</td><td data-label="レッスン時間">30分〜</td><td data-label="食事管理">なし</td><td data-label="対応デバイス">スマホ・PC<br>タブレット</td>
+          </tr>
+        </table>
+      </div>
+      <div class="lb-compare-grid">
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">月額料金</span>1,078円〜<br>3,850円</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">無料体験</span>体験レッスンあり</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン数</span>スタジオ品質多数</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン時間</span>30分〜</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">食事管理</span>なし</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">対応デバイス</span>スマホ・PC<br>タブレット</div>
+      </div>
+      <p class="lb-compare-note">※料金・レッスン内容は変更される場合があります。詳細・最新の情報は公式サイトでご確認ください。</p>
+
+      <div class="lb-fit">
+        <div class="lb-fit-title">
+          <span>向いている人</span>
+        </div>
+        <p>スポーツクラブのレッスン経験がある人、<strong>本格的なプログラムを自宅で受けたい人</strong>に向いています。スタジオ品質のライブレッスンなので、<mark>妥協せずにしっかり運動したい方</mark>におすすめです。</p>
+      </div>
+    </div>
+
+    <div class="lb-card reveal" id="service-torcia">
+      <div class="lb-top">
+        <img class="lb-rank-badge" src="images/ranking/no5.png" alt="総合5位">
+        <div class="lb-top-info">
+          <div class="lb-top-name">torcia<span>（トルチャ）</span></div>
+          <div class="lb-top-rating"><span class="lb-top-rating-label">総合評価</span><span class="rank-stars">★★★★☆</span><span class="rank-score">3.8</span></div>
+        </div>
+      </div>
+
+      <div class="lb-mid">
+        <div class="lb-mid-image">
+          <picture>
+            <source srcset="images/torcia-fv-sp.svg" media="(max-width: 767px)">
+            <img src="images/torcia-fv.svg" alt="torcia（トルチャ） 公式サイトFV（差し替え予定）">
+          </picture>
+        </div>
+        <div class="lb-mid-features">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>ダンス・格闘技系など多彩なジャンルを配信</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>好きな時間にオンデマンドで受講できる自由度</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>気分やその日の目的でジャンルを選べる</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>飽きずに楽しく続けやすいレッスン構成</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lb-compare-table-wrap">
+        <table class="lb-compare-table">
+          <tr>
+            <th>月額料金</th><th>無料体験</th><th>レッスン数</th><th>レッスン時間</th><th>食事管理</th><th>対応デバイス</th>
+          </tr>
+          <tr>
+            <td data-label="月額料金">4,378円〜</td><td data-label="無料体験">無料体験あり</td><td data-label="レッスン数">多数のビデオレッスン</td><td data-label="レッスン時間">好きな時間に受講可</td><td data-label="食事管理">なし</td><td data-label="対応デバイス">スマホ・PC<br>タブレット</td>
+          </tr>
+        </table>
+      </div>
+      <div class="lb-compare-grid">
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">月額料金</span>4,378円〜</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">無料体験</span>無料体験あり</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン数</span>多数のビデオレッスン</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">レッスン時間</span>好きな時間に受講可</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">食事管理</span>なし</div>
+        <div class="lb-compare-cell"><span class="lb-compare-cell-label">対応デバイス</span>スマホ・PC<br>タブレット</div>
+      </div>
+      <p class="lb-compare-note">※料金・レッスン内容は変更される場合があります。詳細・最新の情報は公式サイトでご確認ください。</p>
+
+      <div class="lb-fit">
+        <div class="lb-fit-title">
+          <span>向いている人</span>
+        </div>
+        <p>ダンスや格闘技系など、<strong>幅広いジャンルを気分で選びたい人</strong>に向いています。オンデマンド中心で好きな時間に受けられるので、<mark>スケジュールが不規則な方</mark>にもおすすめです。</p>
+      </div>
+    </div>
+
+    <p class="note-box" style="margin-top:16px;">※2026年8月時点の情報です。料金・レッスン内容・キャンペーン等は変更される場合がありますので、詳細・最新情報は各社公式サイトでご確認ください。</p>
+  </div>
+</section>
+
+<section class="band" id="points">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">CHECK POINT</span></div>
+    <h2 class="section-title reveal">オンラインフィットネス選びで重要な5ポイント</h2>
+    <div class="point-list">
+      <div class="point-item reveal"><div class="point-num">1</div><div><b>自分の生活時間に合わせられるか</b><p>決まった時間に参加できるか、いつでも見られるかは続けやすさに直結します。</p></div></div>
+      <div class="point-item reveal"><div class="point-num">2</div><div><b>やりたいジャンルがあるか</b><p>ヨガ・筋トレ・ダンスなど、続けたいと思えるジャンルがあるかを確認しましょう。</p></div></div>
+      <div class="point-item reveal"><div class="point-num">3</div><div><b>無理なく払える料金か</b><p>1回あたりの単価も含めて、続けやすい金額かをチェック。</p></div></div>
+      <div class="point-item reveal"><div class="point-num">4</div><div><b>続ける仕組みがあるか</b><p>記録機能やレコメンドなど、継続をサポートする機能があるかも重要です。</p></div></div>
+      <div class="point-item reveal"><div class="point-num">5</div><div><b>運動以外のサポートもあるか</b><p>食事管理や体重記録など、運動以外の健康管理サポートがあると続けやすくなります。</p></div></div>
+    </div>
+    <p class="section-sub" style="margin-top:24px;">最後に、一番大切なのは「一番すごいサービス」ではなく、「自分が続けられるサービス」を選ぶことです。</p>
+  </div>
+</section>
+
+<section class="band band-alt" id="faq">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">FAQ</span></div>
+    <h2 class="section-title reveal">よくある質問</h2>
+    <div class="reveal" style="max-width:760px;margin:0 auto;">
+      <details class="faq-item" open>
+        <summary><span class="faq-q"><span class="faq-num">Q1</span>オンラインフィットネスは初心者でもできますか？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A1</span><span>はい。多くのサービスに初心者向けレッスンが用意されています。まずは無料体験期間でレベルを確認するのがおすすめです。</span></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q"><span class="faq-num">Q2</span>どれくらいのスペースが必要ですか？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A2</span><span>1〜2畳程度あれば十分です。ヨガマット1枚分のスペースがあれば多くのレッスンに参加できます。</span></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q"><span class="faq-num">Q3</span>マンションでもできますか？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A3</span><span>可能です。ジャンプなど音や振動が気になる場合は、低負荷メニューやヨガ・ストレッチ系のレッスンを選ぶと安心です。</span></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q"><span class="faq-num">Q4</span>顔出しは必要ですか？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A4</span><span>オンデマンド型の動画視聴であれば顔出しは不要です。LIVEレッスンでもカメラをオフにして参加できる場合が多いです。</span></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q"><span class="faq-num">Q5</span>1日何分くらい運動すればいいですか？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A5</span><span>まずは5〜10分から始めるのがおすすめです。慣れてきたら20〜30分のレッスンに挑戦してみましょう。</span></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q"><span class="faq-num">Q6</span>ダイエットにも使えますか？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A6</span><span>はい。運動レッスンに加えて食事管理機能があるサービスを選ぶと、より効果を実感しやすくなります。</span></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q"><span class="faq-num">Q7</span>YouTubeとの違いは？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A7</span><span>目的やレベルに合わせてレッスンを探しやすく、運動記録や食事管理などのサポート機能がある点が大きな違いです。</span></div>
+      </details>
+      <details class="faq-item">
+        <summary><span class="faq-q"><span class="faq-num">Q8</span>オンラインフィットネスを続けるコツは？</span></summary>
+        <div class="faq-a"><span class="faq-num-a">A8</span><span>「毎日1時間」ではなく「毎日5分」など、無理のない目標から始めることが継続のコツです。</span></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="time">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">空き時間で選ぶ</span></div>
+    <h2 class="section-title reveal">【独自企画②】あなたの空き時間で選ぶ</h2>
+    <p class="section-sub reveal">運動に何分使えますか？「時間ができたら運動する」ではなく、「空いた時間にできる運動」を選びましょう。</p>
+    <div class="time-tabs reveal">
+      <button class="time-tab active" data-rec="LEAN BODY">5〜10分</button>
+      <button class="time-tab" data-rec="LEAN BODY / torcia">20〜30分</button>
+      <button class="time-tab" data-rec="ルネサンス / 24/7 / コナミ">30〜60分</button>
+    </div>
+    <div class="time-result reveal">
+      おすすめは<br><span class="rec" id="timeRec">LEAN BODY</span><br>
+      LEAN BODYは公式に5分〜60分の時間別レッスンを用意しているので、短時間から始めやすいのがポイントです。
+    </div>
+  </div>
+</section>
+
+<section class="band band-soft" id="reasons">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">続かない理由から</span></div>
+    <h2 class="section-title reveal">【独自企画③】「続かない原因」から逆引き</h2>
+    <p class="section-sub reveal">フィットネスが続かない理由、どれですか？</p>
+    <div class="reason-grid">
+      <div class="reason-item reveal"><span>ジムへ行く時間がない（自宅完結型がいい）</span><span class="arrow">→ LEAN BODY</span></div>
+      <div class="reason-item reveal"><span>忙しくて時間がない（5〜10分レッスン対応）</span><span class="arrow">→ LEAN BODY</span></div>
+      <div class="reason-item reveal"><span>何をやればいいかわからない（レコメンド機能）</span><span class="arrow">→ LEAN BODY</span></div>
+      <div class="reason-item reveal"><span>食事も改善したい（食事管理対応）</span><span class="arrow">→ LEAN BODY</span></div>
+      <div class="reason-item reveal"><span>一人だと寂しい（LIVE型）</span><span class="arrow">→ ルネサンス / 24/7</span></div>
+      <div class="reason-item reveal"><span>目に見える成果が欲しい（レッスン数・ジャンル豊富）</span><span class="arrow">→ LEAN BODY</span></div>
+    </div>
+    <p class="section-sub" style="margin-top:24px;">これなら単なるスペック比較ではなく、「あなたが運動を続けられない原因」からサービスを選ぶという比較になります。</p>
+  </div>
+</section>
+
+<section class="band" id="exercise-only">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">運動＋食事＋記録</span></div>
+    <h2 class="section-title reveal">「運動だけ」で選んでいい？</h2>
+    <p class="section-sub reveal">オンラインフィットネスは「運動できればOK」で選んでいませんか？</p>
+    <div class="compare-wrap reveal">
+      <table class="compare">
+        <thead><tr><th>比較項目</th><th class="col-champion">LEAN BODY</th><th>一般的なオンラインフィットネス</th></tr></thead>
+        <tbody>
+          <tr><td>レッスン</td><td class="col-champion">◎</td><td>◎</td></tr>
+          <tr><td>体重記録</td><td class="col-champion">◎</td><td>×</td></tr>
+          <tr><td>食事記録</td><td class="col-champion">◎</td><td>×</td></tr>
+          <tr><td>毎日の栄養バランス管理</td><td class="col-champion">◎</td><td>×</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-sub" style="margin-top:20px;">毎日の健康習慣をまとめて管理できる点は、LEAN BODYの大きな強みです。</p>
+  </div>
+</section>
+
+<section class="band band-alt" id="purpose">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">目的・生活スタイル別</span></div>
+    <h2 class="section-title reveal">目的別・生活スタイル別おすすめ</h2>
+    <p class="section-sub reveal">目的で選ぶなら、生活スタイルで選ぶなら、それぞれの答えをまとめました。</p>
+    <div class="purpose-grid">
+      <div class="purpose-item reveal"><div class="q">運動不足を解消したい</div><div class="a">→ LEAN BODY</div></div>
+      <div class="purpose-item reveal"><div class="q">ダイエットしたい</div><div class="a">→ LEAN BODY</div></div>
+      <div class="purpose-item reveal"><div class="q">LIVE中心で運動したい</div><div class="a">→ 24/7 Online Fitness</div></div>
+      <div class="purpose-item reveal"><div class="q">ヨガ・ピラティスを楽しみたい</div><div class="a">→ ルネサンス</div></div>
+      <div class="purpose-item reveal"><div class="q">スポーツクラブのレッスンが好き</div><div class="a">→ コナミ</div></div>
+      <div class="purpose-item reveal"><div class="q">好きな時間に隙間で運動したい</div><div class="a">→ LEAN BODY</div></div>
+      <div class="purpose-item reveal"><div class="q">帰宅時間が不規則・在宅ワーカー</div><div class="a">→ LEAN BODY</div></div>
+      <div class="purpose-item reveal"><div class="q">運動を一人で続けられない</div><div class="a">→ 24/7 / ルネサンス</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="gym-vs-online">
+  <div class="container">
+    <div class="section-tag-wrap reveal"><span class="section-tag">ジム vs オンライン</span></div>
+    <h2 class="section-title reveal">ジム vs オンラインフィットネス</h2>
+    <p class="section-sub reveal">月額だけじゃない「見えないコスト」を比較。</p>
+    <div class="vs-grid">
+      <div class="vs-col reveal">
+        <h3>ジム</h3>
+        <ul><li>月会費</li><li>+ 交通費</li><li>+ 移動時間</li><li>+ 着替え</li><li>+ 持ち物</li></ul>
+      </div>
+      <div class="vs-divider reveal">VS</div>
+      <div class="vs-col reveal">
+        <h3>オンライン</h3>
+        <ul><li>月額料金</li><li>+ 自宅スペース</li></ul>
+      </div>
+    </div>
+    <p class="section-sub" style="margin-top:24px;">料金だけでなく「運動するまでに必要な時間」も比較すると、オンラインフィットネスの手軽さが見えてきます。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:var(--color-text);">オンラインフィットネス徹底比較ガイド</div>
+        <p style="max-width:340px;">当サイトは各サービスの公式サイト掲載情報をもとに独自の視点で比較・紹介する非公式の比較メディアです。最新の料金・条件は必ず各社公式サイトをご確認ください。</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">運営者情報</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">お問い合わせ</a>
+      </div>
+    </div>
+    <p>&copy; 2026 Online Fitness Compare Guide. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  var timeTabs = document.querySelectorAll('.time-tab');
+  var timeRec = document.getElementById('timeRec');
+  timeTabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      timeTabs.forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      timeRec.textContent = tab.getAttribute('data-rec');
+    });
+  });
+
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var navPanel = document.getElementById('navPanel');
+  var navOverlay = document.getElementById('navOverlay');
+  var navPanelClose = document.getElementById('navPanelClose');
+  function openNav() { navPanel.classList.add('open'); navOverlay.classList.add('open'); hamburgerBtn.classList.add('open'); }
+  function closeNav() { navPanel.classList.remove('open'); navOverlay.classList.remove('open'); hamburgerBtn.classList.remove('open'); }
+  hamburgerBtn.addEventListener('click', function(){ navPanel.classList.contains('open') ? closeNav() : openNav(); });
+  navOverlay.addEventListener('click', closeNav);
+  navPanelClose.addEventListener('click', closeNav);
+  document.querySelectorAll('.nav-links a').forEach(function(a){ a.addEventListener('click', closeNav); });
+</script>
+
+</body>
+</html>

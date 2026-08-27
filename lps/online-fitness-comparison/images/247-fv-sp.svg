@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <rect x="0" y="0" width="400" height="400" fill="#EDF3FC"/>
+  <rect x="5" y="5" width="390" height="390" fill="none" stroke="#B9C7DC" stroke-width="3" stroke-dasharray="10 8" rx="10"/>
+  <g transform="translate(160, 130)" stroke="#8FA3BE" stroke-width="3" fill="none">
+    <rect x="0" y="0" width="80" height="66" rx="8"/>
+    <circle cx="23" cy="21" r="7"/>
+    <path d="M80 50 L57 27 L37 47 L23 33 L0 56" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="50%" y="272" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="24" font-weight="700" fill="#5C6B7C">24/7</text>
+  <text x="50%" y="302" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="17" fill="#8B99AC">FV差し替え予定</text>
+</svg>
