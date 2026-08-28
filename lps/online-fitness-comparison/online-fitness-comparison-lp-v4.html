@@ -91,16 +91,17 @@
 
   /* section tag (replaces old numbering) */
   .section-tag {
-    display: inline-flex; align-items: center; justify-content: center; margin: 0 auto 14px;
+    display: inline-flex; align-items: center; justify-content: center; margin: 0 auto 10px;
     font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
     color: var(--color-primary); background: var(--color-primary-soft);
     padding: 7px 18px; border-radius: 999px; text-align: center;
   }
   .section-tag-wrap { text-align: center; }
+  .band-alt .section-tag, .band-soft .section-tag { background: var(--color-primary); color: #fff; }
   .section-title { font-size: clamp(22px, 4vw, 32px); text-align: center; margin-bottom: 10px; }
   .section-sub { text-align: center; color: var(--color-text-muted); font-size: 15px; max-width: 640px; margin: 0 auto 40px; }
   .note-box { font-size: 13px; color: var(--color-text-muted); text-align: left; }
-  .highlight { background: linear-gradient(transparent 60%, var(--color-gold) 60%); font-weight: 700; padding: 0 2px; opacity: 0.9; }
+  .highlight, mark { background: linear-gradient(transparent 55%, #FFE45E 55%); color: var(--color-text); font-weight: 700; padding: 0 1px; }
 
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -249,22 +250,35 @@
   /* Diagnosis */
   .diag-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
   .diag-card { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 26px; box-shadow: var(--shadow-card); display: flex; flex-direction: column; }
-  .diag-card .diag-letter {
-    display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px;
-    border-radius: 50%; background: var(--color-primary-soft); color: var(--color-primary); font-weight: 700; margin-bottom: 10px;
-  }
-  .diag-card .diag-type-name { font-size: 13px; font-weight: 700; color: var(--color-primary); margin-bottom: 6px; }
+  .diag-icon { width: 36px; height: 36px; color: var(--color-primary); margin: 0 auto 10px; }
   .diag-card h3 { font-size: 15px; margin-bottom: 10px; }
   .diag-card p { font-size: 15px; color: var(--color-text-muted); margin: 0 0 14px; flex-grow: 1; }
-  .diag-result { font-size: 15px; font-weight: 700; color: var(--color-text); margin-bottom: 0; }
+  .diag-recommend {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+    margin-top: auto; position: relative; text-decoration: none;
+    background: #FFE9F2; border-radius: 14px; padding: 16px 18px 14px;
+    font-size: 14px; line-height: 1.6; color: var(--color-text); text-align: center;
+  }
+  .diag-recommend::before {
+    content: ""; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+    border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #FFE9F2;
+  }
+  .diag-recommend strong { color: #FF2B7F; font-weight: 800; }
 
   /* Type explain */
   .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
   .type-card { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; }
-  .type-card h3 { font-size: 15px; margin-bottom: 12px; color: var(--color-primary); }
-  .type-row { font-size: 15px; margin-bottom: 8px; }
+  .type-card h3 { font-size: 16px; margin-bottom: 14px; color: var(--color-primary); text-align: center; }
+  .type-illustration { border-radius: var(--radius-sm); overflow: hidden; aspect-ratio: 4 / 3; margin-bottom: 16px; }
+  .type-illustration img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .type-row { display: flex; align-items: center; gap: 8px; font-size: 15px; margin-bottom: 8px; }
   .type-row b { color: var(--color-text); }
   .type-row.merit { color: var(--color-text-muted); }
+  .type-mark { width: 16px; height: 16px; flex-shrink: 0; }
+  .type-good-mark { flex-shrink: 0; font-size: 20px; font-weight: 800; line-height: 1; color: var(--color-score); }
+  .type-row.type-good { color: var(--color-text-muted); }
+  .type-row.type-bad { color: var(--color-text-muted); }
+  .type-row.type-bad .type-mark { color: var(--color-text-muted); }
 
   /* Simulator table */
   .sim-table-wrap { overflow-x: auto; }
@@ -275,20 +289,24 @@
   .col-champion { background: var(--color-primary-soft); font-weight: 700; }
 
   /* vs table (youtube / gym) */
-  .vs-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; }
+  .vs-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: stretch; }
   .vs-col { background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 24px; }
   .vs-col h3 { text-align: center; margin-bottom: 16px; font-size: 16px; }
   .vs-col ul { margin: 0; padding-left: 20px; font-size: 15px; color: var(--color-text-muted); display: grid; gap: 8px; }
-  .vs-divider { font-size: 20px; font-weight: 700; color: var(--color-primary); }
+  .vs-divider { font-size: 20px; font-weight: 700; color: var(--color-primary); align-self: center; }
 
-  /* Services band heading (banner style) */
+  /* Services band heading — full-bleed banner (参考サイトの「帯」デザインに合わせ画面幅いっぱいに) */
   .band-heading {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-    color: #fff; text-align: center; padding: 34px 24px; border-radius: var(--radius-lg); margin-bottom: 40px;
+    color: #fff; text-align: center; padding: 34px 24px;
+    width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+    border-radius: 0; margin-bottom: 40px;
   }
-  .band-heading .section-tag { background: rgba(255,255,255,0.18); color: #fff; margin-bottom: 10px; }
-  .band-heading h2 { font-size: clamp(22px, 4vw, 30px); color: #fff; margin-bottom: 8px; }
-  .band-heading p { color: rgba(255,255,255,0.85); font-size: 15px; margin: 0; }
+  .band-heading .section-tag {
+    display: block; background: none; color: #FCE32D;
+    font-size: 24px; font-weight: 700; letter-spacing: 0.04em; padding: 0; margin-bottom: 14px; line-height: 1.2;
+  }
+  .band-heading h2 { font-size: clamp(24px, 5vw, 38px); font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 0; }
 
   /* LEAN BODY (1位) detail — compare-card style */
   .lb-card {
@@ -352,10 +370,6 @@
   .lb-fit-title span { font-size: 17px; font-weight: 800; color: #FF2B7F; }
   .lb-fit p { font-size: 15px; color: var(--color-text); margin: 0; line-height: 1.9; }
   .lb-fit p strong { font-weight: 700; }
-  .lb-fit p mark {
-    background: linear-gradient(transparent 55%, #FFE45E 55%); color: var(--color-text);
-    font-weight: 700; padding: 0 1px;
-  }
 
   /* コンテンツ②: 特徴カードグリッド（見出しなし・業種問わず汎用／レスポンシブ／枠・バッジはサイトのメインカラー） */
   .lb-block-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 24px; margin-top: 40px; }
@@ -401,27 +415,63 @@
 
   /* reason list */
   .reason-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .reason-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 16px 18px; font-size: 15px; }
-  .reason-item .arrow { color: var(--color-primary); font-weight: 700; white-space: nowrap; }
+  .reason-item {
+    display: flex; flex-direction: column; align-items: stretch; text-align: center; gap: 10px;
+    background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-sm);
+    padding: 18px; font-size: 15px;
+  }
+  .reason-item p { margin: 0; }
+  .reason-hint { font-weight: 800; color: var(--color-primary); font-size: 14px; }
 
   /* compare big table */
-  .compare-wrap { overflow-x: auto; }
-  table.compare { width: 100%; border-collapse: collapse; min-width: 720px; background: var(--color-card-bg); border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); }
-  table.compare th, table.compare td { padding: 15px; text-align: center; border-bottom: 1px solid var(--color-border); font-size: 15px; }
-  table.compare thead th { background: var(--color-bg-soft); }
-  table.compare th:first-child, table.compare td:first-child { text-align: left; color: var(--color-text-muted); font-weight: 600; }
+  .exercise-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 8px; }
+  .exercise-col {
+    background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+    padding: 26px 20px; text-align: center; box-shadow: var(--shadow-card);
+  }
+  .exercise-col h3 { font-size: 16px; color: var(--color-text-muted); margin-bottom: 18px; }
+  .exercise-col--champion { background: var(--color-primary-soft); border: 2px solid var(--color-primary); }
+  .exercise-col--champion h3 { color: var(--color-primary); font-weight: 800; }
+  .exercise-flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin-bottom: 14px; }
+  .exercise-flow-break { flex-basis: 100%; height: 0; }
+  .exercise-chip { background: var(--color-bg-soft); border-radius: 8px; padding: 8px 14px; font-size: 14px; font-weight: 700; }
+  .exercise-col--champion .exercise-chip { background: var(--color-card-bg); color: var(--color-primary); }
+  .exercise-plus { font-weight: 800; color: var(--color-text-muted); font-size: 14px; }
+  .exercise-arrow { font-size: 22px; color: var(--color-text-muted); margin-bottom: 10px; }
+  .exercise-result { font-size: 15px; font-weight: 700; color: var(--color-text-muted); margin: 0; }
+  .exercise-result--champion { color: var(--color-primary); font-size: 16px; font-weight: 800; }
 
   /* time select */
-  .time-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; }
-  .time-tab { border: 2px solid var(--color-border); background: var(--color-card-bg); border-radius: 999px; padding: 9px 20px; font-weight: 700; font-size: 14px; cursor: pointer; color: var(--color-text-muted); }
-  .time-tab.active { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-soft); }
-  .time-result { max-width: 560px; margin: 0 auto; background: var(--color-card-bg); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); border: 1px solid var(--color-border); padding: 30px; text-align: center; font-size: 15px; }
-  .time-result .rec { font-size: 20px; font-weight: 800; color: var(--color-primary); margin: 8px 0; }
+  .time-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 28px; }
+  .time-card { display: flex; flex-direction: column; background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 28px 10px; text-align: center; }
+  .time-icon { width: 56px; height: 56px; margin: 0 auto 14px; }
+  .time-dur { font-size: 18px; font-weight: 800; margin-bottom: 10px; }
+  .time-desc { margin: auto 0 0; padding-top: 14px; font-size: 14px; color: var(--color-text-muted); text-align: left; }
+  .time-feature-list { text-align: left; margin-bottom: 4px; }
+  .time-feature-list .type-row { font-size: 14px; margin-bottom: 6px; }
+  .rec-chip {
+    display: inline-block; border: 2px solid var(--color-primary); color: var(--color-primary);
+    background: var(--color-primary-soft); font-weight: 800; font-size: 15px;
+    padding: 6px 14px; border-radius: 999px;
+  }
 
   /* point list */
-  .point-list { display: grid; gap: 16px; }
-  .point-item { display: flex; gap: 16px; align-items: flex-start; background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: 18px 20px; }
-  .point-item .point-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--color-primary); color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .point-list { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 16px; row-gap: 40px; margin-top: 28px; }
+  .point-item {
+    position: relative; display: flex; flex-direction: column;
+    width: calc(30% - 5px); box-sizing: border-box; overflow: hidden;
+    background: var(--color-card-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md);
+  }
+  .point-num {
+    position: absolute; top: 0; left: 0; width: 90px; height: 90px;
+    background: var(--color-primary); clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+  .point-num-value {
+    position: absolute; top: 17px; left: 14px; color: #fff; font-size: 22px; font-weight: 800; line-height: 1;
+  }
+  .point-icon { width: 52px; height: 52px; color: var(--color-primary); margin: 0 auto 8px; }
+  .point-body { padding: 30px 11px 22px; gap: 6px; display: flex; flex-direction: column; }
+  .point-item b { display: block; font-size: 15px; text-align: center; }
   .point-item p { margin: 4px 0 0; font-size: 15px; color: var(--color-text-muted); }
 
   /* FAQ */
@@ -451,7 +501,17 @@
   .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
 
   @media (max-width: 900px) {
-    .vs-grid, .diag-grid, .type-grid, .reason-grid, .purpose-grid, .lb-mid, .lb-block-grid { grid-template-columns: 1fr; }
+    .vs-grid, .diag-grid, .type-grid, .reason-grid, .purpose-grid, .lb-mid, .lb-block-grid, .exercise-compare { grid-template-columns: 1fr; }
+    .point-item { width: calc(50% - 8px); }
+    .point-num { width: 64px; height: 64px; }
+    .point-num-value { top: 10px; left: 9px; font-size: 17px; }
+    .point-icon { width: 32px; height: 32px; margin-bottom: 6px; }
+    .point-body { padding: 20px 12px 18px; }
+    .point-item b { font-size: 14px; }
+    .point-item p { font-size: 14px; }
+    .time-grid { grid-template-columns: 1fr; gap: 14px; }
+    .time-icon { width: 44px; height: 44px; margin-bottom: 10px; }
+    .time-card { padding: 20px 16px; }
     .lb-mid-features li { white-space: normal; }
     .vs-divider { text-align: center; }
     .rank-cards { grid-template-columns: repeat(2, 1fr); }
@@ -472,6 +532,8 @@
     }
   }
   @media (max-width: 560px) {
+    .container { padding: 0 1.75%; } /* コンテンツ幅を画面の約96.5%に */
+    .lb-fit { padding: 24px 16px 20px; }
     .rank-cards { grid-template-columns: 1fr; }
 
     /* Compact ranking card — left column (crown+number / image / name), right column (highlight / 3-col table / button) */
@@ -589,8 +651,8 @@
 
 <section class="band" id="ranking">
   <div class="container">
-    <div class="section-tag-wrap reveal"><span class="section-tag">RANKING</span></div>
-    <h2 class="section-title reveal">オンラインフィットネス おすすめTOP5</h2>
+    <div class="section-tag-wrap reveal"><span class="section-tag">オンラインフィットネス</span></div>
+    <h2 class="section-title reveal">おすすめTOP5</h2>
     <p class="section-sub reveal">総合評価・料金・レッスン数・続けやすさをもとにランキング化しました。</p>
 
     <div class="rank-cards reveal">
@@ -632,7 +694,7 @@
             </picture>
           </div>
           <div class="rank-name">
-            <span class="rank-name-full">ルネサンスオンライン<br>Livestream</span>
+            <span class="rank-name-full">ルネサンス オンライン<br>Livestream</span>
             <span class="rank-name-short">ルネサンス<br>オンライン</span>
           </div>
         </div>
@@ -731,40 +793,40 @@
 
 <section class="band band-alt" id="types">
   <div class="container">
-    <div class="section-tag-wrap reveal"><span class="section-tag">TYPE GUIDE</span></div>
-    <h2 class="section-title reveal">オンラインフィットネス、結局どこが違う？</h2>
+    <div class="section-tag-wrap reveal"><span class="section-tag">オンラインフィットネス</span></div>
+    <h2 class="section-title reveal">結局どこが違う？</h2>
     <p class="section-sub reveal">実はオンラインフィットネスは大きく3タイプに分かれます。</p>
     <div class="type-grid">
       <div class="type-card reveal">
-        <h3>①オンデマンド型</h3>
+        <h3>オンデマンド型</h3>
+        <div class="type-illustration"><img src="images/feature-placeholder.svg" alt="オンデマンド型のイメージ（差し替え予定）"></div>
         <div class="type-row"><b>好きな時間に好きなだけ</b></div>
-        <div class="type-row merit">メリット：時間に縛られない</div>
-        <div class="type-row merit">デメリット：自分で続ける意志が必要</div>
-        <div class="type-row">代表：LEAN BODY</div>
+        <div class="type-row type-good"><span class="type-good-mark">◎</span><span class="highlight">時間に縛られない</span></div>
+        <div class="type-row type-bad"><svg class="type-mark" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>自分で続ける意志が必要</div>
       </div>
       <div class="type-card reveal">
-        <h3>②オンラインスタジオ型</h3>
+        <h3>オンラインスタジオ型</h3>
+        <div class="type-illustration"><img src="images/feature-placeholder.svg" alt="オンラインスタジオ型のイメージ（差し替え予定）"></div>
         <div class="type-row"><b>決まった時間にLIVE参加</b></div>
-        <div class="type-row merit">メリット：運動する時間が決まりやすい</div>
-        <div class="type-row merit">デメリット：時間の自由度は低くなる</div>
-        <div class="type-row">代表：ルネサンス / 24/7</div>
+        <div class="type-row type-good"><span class="type-good-mark">◎</span><span class="highlight">運動する時間が決まりやすい</span></div>
+        <div class="type-row type-bad"><svg class="type-mark" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>時間の自由度は低くなる</div>
       </div>
       <div class="type-card reveal">
-        <h3>③スポーツクラブ型</h3>
+        <h3>スポーツクラブ型</h3>
+        <div class="type-illustration"><img src="images/feature-placeholder.svg" alt="スポーツクラブ型のイメージ（差し替え予定）"></div>
         <div class="type-row"><b>ジム品質のプログラムを自宅で</b></div>
-        <div class="type-row merit">メリット：本格的なプログラム</div>
-        <div class="type-row merit">デメリット：ライトユーザーにはオーバースペックな場合も</div>
-        <div class="type-row">代表：コナミ</div>
+        <div class="type-row type-good"><span class="type-good-mark">◎</span><span class="highlight">本格的なプログラム</span></div>
+        <div class="type-row type-bad"><svg class="type-mark" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>本格的すぎる場合も</div>
       </div>
     </div>
-    <p class="section-sub" style="margin-top:24px;">LEAN BODYは①を中心にLIVEも利用できる「ハイブリッド型」と言えます。</p>
+    <p class="section-sub" style="margin-top:24px;">LEAN BODYはオンデマンド型を中心にLIVEも利用できる「ハイブリッド型」と言えます。</p>
   </div>
 </section>
 
 <section class="band" id="simulator">
   <div class="container">
-    <div class="section-tag-wrap reveal"><span class="section-tag">料金シミュレーション</span></div>
-    <h2 class="section-title reveal">【独自企画①】月額料金より、「1回あたり」で考えてみる</h2>
+    <div class="section-tag-wrap reveal"><span class="section-tag">料金の考え方</span></div>
+    <h2 class="section-title reveal">「1回あたり」で考えてみる</h2>
     <p class="section-sub reveal">月2,000円でも使わなければ高い。月2,000円を20回使えば1回100円。という考え方です。</p>
     <div class="sim-table-wrap reveal">
       <table class="sim">
@@ -819,25 +881,25 @@
     <p class="section-sub reveal">あなたはどのタイプ？ 当てはまるものを選んでみてください。</p>
     <div class="diag-grid">
       <div class="diag-card reveal">
-        <div class="diag-letter">A</div>
-        <div class="diag-type-name">隙間時間タイプ</div>
+        <svg class="diag-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="section-tag">隙間時間タイプ</span>
         <h3>好きな時間にサクッと運動したい</h3>
         <p>「今日は5分だけ」でもOK。動画は24時間見放題だから、隙間時間に自分のペースで続けられます。</p>
-        <div class="diag-result">おすすめ → LEAN BODY</div>
+        <a href="#service-leanbody" class="diag-recommend"><span>こんな人には</span><span><strong>LEAN BODY</strong></span><span>がおすすめ！</span></a>
       </div>
       <div class="diag-card reveal">
-        <div class="diag-letter">B</div>
-        <div class="diag-type-name">みんなでがんばるタイプ</div>
+        <svg class="diag-icon" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 20c0-3 2.5-5 5-5s5 2 5 5M11 20c0-3 2.5-5 5-5s5 2 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="section-tag">みんなでがんばるタイプ</span>
         <h3>決まった時間にみんなと運動したい</h3>
         <p>LIVEレッスン中心で運動習慣を作りやすい。同じ時間に参加する仲間がいることでモチベーションが続きます。</p>
-        <div class="diag-result">おすすめ → ルネサンス / 24/7 Online Fitness</div>
+        <a href="#services" class="diag-recommend"><span>こんな人には</span><span><strong>ルネサンス オンライン Livestream</strong></span><span><strong>24/7 Online Fitness</strong></span><span>がおすすめ！</span></a>
       </div>
       <div class="diag-card reveal">
-        <div class="diag-letter">C</div>
-        <div class="diag-type-name">本格派タイプ</div>
-        <h3>スポーツクラブ品質を自宅で楽しみたい</h3>
+        <svg class="diag-icon" viewBox="0 0 24 24" fill="none"><path d="M4 12h16M4 9v6M20 9v6M7 7v10M17 7v10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="section-tag">本格派タイプ</span>
+        <h3>自宅で本格レッスンをしたい</h3>
         <p>大手スポーツクラブのプログラムをオンラインで。経験豊富なインストラクターによる本格レッスンが魅力です。</p>
-        <div class="diag-result">おすすめ → コナミ</div>
+        <a href="#service-konami" class="diag-recommend"><span>こんな人には</span><span><strong>コナミスポーツクラブ オンラインフィットネス</strong></span><span>がおすすめ！</span></a>
       </div>
     </div>
   </div>
@@ -846,9 +908,8 @@
 <section class="band band-alt" id="services">
   <div class="container">
     <div class="band-heading reveal">
-      <span class="section-tag">SERVICE GUIDE</span>
-      <h2>5サービスを1社ずつ詳しく紹介</h2>
-      <p>それぞれの特徴・メリット・注意点・口コミ・おすすめな人をまとめました。</p>
+      <span class="section-tag">オンラインフィットネス</span>
+      <h2>TOP5を詳しくチェック</h2>
     </div>
 
     <div class="lb-card reveal" id="service-leanbody">
@@ -1194,16 +1255,51 @@
 
 <section class="band" id="points">
   <div class="container">
-    <div class="section-tag-wrap reveal"><span class="section-tag">CHECK POINT</span></div>
-    <h2 class="section-title reveal">オンラインフィットネス選びで重要な5ポイント</h2>
+    <div class="section-tag-wrap reveal"><span class="section-tag">オンラインフィットネスを選ぶ際に</span></div>
+    <h2 class="section-title reveal">重要な5つのポイント</h2>
     <div class="point-list">
-      <div class="point-item reveal"><div class="point-num">1</div><div><b>自分の生活時間に合わせられるか</b><p>決まった時間に参加できるか、いつでも見られるかは続けやすさに直結します。</p></div></div>
-      <div class="point-item reveal"><div class="point-num">2</div><div><b>やりたいジャンルがあるか</b><p>ヨガ・筋トレ・ダンスなど、続けたいと思えるジャンルがあるかを確認しましょう。</p></div></div>
-      <div class="point-item reveal"><div class="point-num">3</div><div><b>無理なく払える料金か</b><p>1回あたりの単価も含めて、続けやすい金額かをチェック。</p></div></div>
-      <div class="point-item reveal"><div class="point-num">4</div><div><b>続ける仕組みがあるか</b><p>記録機能やレコメンドなど、継続をサポートする機能があるかも重要です。</p></div></div>
-      <div class="point-item reveal"><div class="point-num">5</div><div><b>運動以外のサポートもあるか</b><p>食事管理や体重記録など、運動以外の健康管理サポートがあると続けやすくなります。</p></div></div>
+      <div class="point-item reveal">
+        <div class="point-num"><span class="point-num-value">01</span></div>
+        <div class="point-body">
+          <svg class="point-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="15" stroke="currentColor" stroke-width="2.2"/><path d="M20 11v9l6 3.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <b>自分の生活時間に合わせられるか</b>
+          <p>決まった時間に参加できるか、いつでも見られるかは続けやすさに直結します。</p>
+        </div>
+      </div>
+      <div class="point-item reveal">
+        <div class="point-num"><span class="point-num-value">02</span></div>
+        <div class="point-body">
+          <svg class="point-icon" viewBox="0 0 40 40" fill="none"><rect x="6" y="16" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.8" opacity="0.5"/><rect x="10" y="11" width="20" height="14" rx="3" stroke="currentColor" stroke-width="1.8" opacity="0.75"/><rect x="14" y="6" width="20" height="14" rx="3" stroke="currentColor" stroke-width="2.2"/></svg>
+          <b>やりたいジャンルがあるか</b>
+          <p>ヨガ・筋トレ・ダンスなど、続けたいと思えるジャンルがあるかを確認しましょう。</p>
+        </div>
+      </div>
+      <div class="point-item reveal">
+        <div class="point-num"><span class="point-num-value">03</span></div>
+        <div class="point-body">
+          <svg class="point-icon" viewBox="0 0 40 40" fill="none"><rect x="5" y="12" width="30" height="20" rx="4" stroke="currentColor" stroke-width="2.2"/><path d="M5 18h30" stroke="currentColor" stroke-width="2.2"/><path d="M24 22l4 6 4-6M28 28v5M25 25h6M25 27.5h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <b>無理なく払える料金か</b>
+          <p>1回あたりの単価も含めて、続けやすい金額かをチェック。</p>
+        </div>
+      </div>
+      <div class="point-item reveal">
+        <div class="point-num"><span class="point-num-value">04</span></div>
+        <div class="point-body">
+          <svg class="point-icon" viewBox="0 0 40 40" fill="none"><path d="M13 26v-8a7 7 0 0114 0v8l2.5 3h-19l2.5-3z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M17 29a3 3 0 006 0" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M28 10a6 6 0 015 9M31 8v3h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <b>続ける仕組みがあるか</b>
+          <p>記録機能やレコメンドなど、継続をサポートする機能があるかも重要です。</p>
+        </div>
+      </div>
+      <div class="point-item reveal">
+        <div class="point-num"><span class="point-num-value">05</span></div>
+        <div class="point-body">
+          <svg class="point-icon" viewBox="0 0 40 40" fill="none"><path d="M20 32s-11-6.5-14-13A7.5 7.5 0 0120 12a7.5 7.5 0 0114 7c-3 6.5-14 13-14 13z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M20 16v8M16 20h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <b>運動以外のサポートもあるか</b>
+          <p>食事管理や体重記録など、運動以外の健康管理サポートがあると続けやすくなります。</p>
+        </div>
+      </div>
     </div>
-    <p class="section-sub" style="margin-top:24px;">最後に、一番大切なのは「一番すごいサービス」ではなく、「自分が続けられるサービス」を選ぶことです。</p>
+    <p class="section-sub" style="margin-top:24px;">最後に、一番大切なのは「一番すごいサービス」ではなく、「自分が続けられるサービス」を<span style="white-space:nowrap;">選ぶ</span>ことです。</p>
   </div>
 </section>
 
@@ -1250,33 +1346,86 @@
 
 <section class="band" id="time">
   <div class="container">
-    <div class="section-tag-wrap reveal"><span class="section-tag">空き時間で選ぶ</span></div>
-    <h2 class="section-title reveal">【独自企画②】あなたの空き時間で選ぶ</h2>
+    <div class="section-tag-wrap reveal"><span class="section-tag">時間で選ぶ</span></div>
+    <h2 class="section-title reveal">あなたの空き時間で選ぶ</h2>
     <p class="section-sub reveal">運動に何分使えますか？「時間ができたら運動する」ではなく、「空いた時間にできる運動」を選びましょう。</p>
-    <div class="time-tabs reveal">
-      <button class="time-tab active" data-rec="LEAN BODY">5〜10分</button>
-      <button class="time-tab" data-rec="LEAN BODY / torcia">20〜30分</button>
-      <button class="time-tab" data-rec="ルネサンス / 24/7 / コナミ">30〜60分</button>
-    </div>
-    <div class="time-result reveal">
-      おすすめは<br><span class="rec" id="timeRec">LEAN BODY</span><br>
-      LEAN BODYは公式に5分〜60分の時間別レッスンを用意しているので、短時間から始めやすいのがポイントです。
+    <div class="time-grid">
+      <div class="time-card reveal">
+        <svg class="time-icon" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-border)" stroke-width="4"/>
+          <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" stroke-dasharray="16.8 83.8" transform="rotate(-90 20 20)"/>
+        </svg>
+        <div class="time-dur">5〜10分</div>
+        <div class="time-feature-list">
+          <div class="type-row type-good"><span class="type-good-mark">◎</span>動画1本で完結</div>
+          <div class="type-row type-good"><span class="type-good-mark">◎</span>好きなタイミングでOK</div>
+        </div>
+        <p class="time-desc">LEAN BODYならスキマ時間にサクッと1本。歯磨きやお風呂上がりの延長で始められます。</p>
+      </div>
+      <div class="time-card reveal">
+        <svg class="time-icon" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-border)" stroke-width="4"/>
+          <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" stroke-dasharray="50.3 50.3" transform="rotate(-90 20 20)"/>
+        </svg>
+        <div class="time-dur">20〜30分</div>
+        <div class="time-feature-list">
+          <div class="type-row type-good"><span class="type-good-mark">◎</span>ジャンル・強度を選べる</div>
+          <div class="type-row type-good"><span class="type-good-mark">◎</span>通勤前後や休憩中に</div>
+        </div>
+        <p class="time-desc">LEAN BODY・torciaなら、1レッスン分きちんと体を動かせます。</p>
+      </div>
+      <div class="time-card reveal">
+        <svg class="time-icon" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-border)" stroke-width="4"/>
+          <circle cx="20" cy="20" r="16" fill="none" stroke="var(--color-primary)" stroke-width="4" stroke-linecap="round" stroke-dasharray="100.5 0.1" transform="rotate(-90 20 20)"/>
+        </svg>
+        <div class="time-dur">30〜60分</div>
+        <div class="time-feature-list">
+          <div class="type-row type-good"><span class="type-good-mark">◎</span>ライブレッスンで一体感</div>
+          <div class="type-row type-good"><span class="type-good-mark">◎</span>専門インストラクターの指導</div>
+        </div>
+        <p class="time-desc">ルネサンス・24/7・コナミなら、ジム品質のプログラムをじっくり受けられます。</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="band band-soft" id="reasons">
   <div class="container">
-    <div class="section-tag-wrap reveal"><span class="section-tag">続かない理由から</span></div>
-    <h2 class="section-title reveal">【独自企画③】「続かない原因」から逆引き</h2>
+    <div class="section-tag-wrap reveal"><span class="section-tag">続けられない理由から</span></div>
+    <h2 class="section-title reveal">「続かない原因」から逆引き</h2>
     <p class="section-sub reveal">フィットネスが続かない理由、どれですか？</p>
     <div class="reason-grid">
-      <div class="reason-item reveal"><span>ジムへ行く時間がない（自宅完結型がいい）</span><span class="arrow">→ LEAN BODY</span></div>
-      <div class="reason-item reveal"><span>忙しくて時間がない（5〜10分レッスン対応）</span><span class="arrow">→ LEAN BODY</span></div>
-      <div class="reason-item reveal"><span>何をやればいいかわからない（レコメンド機能）</span><span class="arrow">→ LEAN BODY</span></div>
-      <div class="reason-item reveal"><span>食事も改善したい（食事管理対応）</span><span class="arrow">→ LEAN BODY</span></div>
-      <div class="reason-item reveal"><span>一人だと寂しい（LIVE型）</span><span class="arrow">→ ルネサンス / 24/7</span></div>
-      <div class="reason-item reveal"><span>目に見える成果が欲しい（レッスン数・ジャンル豊富）</span><span class="arrow">→ LEAN BODY</span></div>
+      <div class="reason-item reveal">
+        <p>ジムへ行く時間がない（自宅完結型がいい）</p>
+        <span class="reason-hint">そんなあなたにオススメ！</span>
+        <a href="#service-leanbody" class="diag-recommend"><span><strong>LEAN BODY</strong></span></a>
+      </div>
+      <div class="reason-item reveal">
+        <p>忙しくて時間がない（5〜10分レッスン対応）</p>
+        <span class="reason-hint">そんなあなたにオススメ！</span>
+        <a href="#service-leanbody" class="diag-recommend"><span><strong>LEAN BODY</strong></span></a>
+      </div>
+      <div class="reason-item reveal">
+        <p>何をやればいいかわからない（レコメンド機能）</p>
+        <span class="reason-hint">そんなあなたにオススメ！</span>
+        <a href="#service-leanbody" class="diag-recommend"><span><strong>LEAN BODY</strong></span></a>
+      </div>
+      <div class="reason-item reveal">
+        <p>食事も改善したい（食事管理対応）</p>
+        <span class="reason-hint">そんなあなたにオススメ！</span>
+        <a href="#service-leanbody" class="diag-recommend"><span><strong>LEAN BODY</strong></span></a>
+      </div>
+      <div class="reason-item reveal">
+        <p>一人だと寂しい（LIVE型）</p>
+        <span class="reason-hint">そんなあなたにオススメ！</span>
+        <a href="#services" class="diag-recommend"><span><strong>ルネサンス オンライン Livestream</strong></span><span><strong>24/7 Online Fitness</strong></span></a>
+      </div>
+      <div class="reason-item reveal">
+        <p>目に見える成果が欲しい（レッスン数・ジャンル豊富）</p>
+        <span class="reason-hint">そんなあなたにオススメ！</span>
+        <a href="#service-leanbody" class="diag-recommend"><span><strong>LEAN BODY</strong></span></a>
+      </div>
     </div>
     <p class="section-sub" style="margin-top:24px;">これなら単なるスペック比較ではなく、「あなたが運動を続けられない原因」からサービスを選ぶという比較になります。</p>
   </div>
@@ -1284,21 +1433,36 @@
 
 <section class="band" id="exercise-only">
   <div class="container">
-    <div class="section-tag-wrap reveal"><span class="section-tag">運動＋食事＋記録</span></div>
-    <h2 class="section-title reveal">「運動だけ」で選んでいい？</h2>
-    <p class="section-sub reveal">オンラインフィットネスは「運動できればOK」で選んでいませんか？</p>
-    <div class="compare-wrap reveal">
-      <table class="compare">
-        <thead><tr><th>比較項目</th><th class="col-champion">LEAN BODY</th><th>一般的なオンラインフィットネス</th></tr></thead>
-        <tbody>
-          <tr><td>レッスン</td><td class="col-champion">◎</td><td>◎</td></tr>
-          <tr><td>体重記録</td><td class="col-champion">◎</td><td>×</td></tr>
-          <tr><td>食事記録</td><td class="col-champion">◎</td><td>×</td></tr>
-          <tr><td>毎日の栄養バランス管理</td><td class="col-champion">◎</td><td>×</td></tr>
-        </tbody>
-      </table>
+    <div class="section-tag-wrap reveal"><span class="section-tag">オンラインフィットネスは</span></div>
+    <h2 class="section-title reveal">「運動できればOK」で選んでいませんか？</h2>
+    <div class="exercise-compare reveal">
+      <div class="exercise-col">
+        <h3>一般的な<br>オンラインフィットネス</h3>
+        <div class="exercise-flow">
+          <span class="exercise-chip">レッスン</span>
+        </div>
+        <div class="exercise-arrow">↓</div>
+        <p class="exercise-result">運動終了</p>
+      </div>
+      <div class="exercise-col exercise-col--champion">
+        <h3>LEAN BODY</h3>
+        <div class="exercise-flow">
+          <span class="exercise-chip">レッスン</span>
+          <span class="exercise-plus">＋</span>
+          <span class="exercise-chip">食事記録</span>
+          <span class="exercise-plus">＋</span>
+          <span class="exercise-chip">体重</span>
+          <span class="exercise-plus">＋</span>
+          <div class="exercise-flow-break"></div>
+          <span class="exercise-chip">体脂肪</span>
+          <span class="exercise-plus">＋</span>
+          <span class="exercise-chip">歩数</span>
+        </div>
+        <div class="exercise-arrow">↓</div>
+        <p class="exercise-result exercise-result--champion">毎日の健康習慣をまとめて管理</p>
+      </div>
     </div>
-    <p class="section-sub" style="margin-top:20px;">毎日の健康習慣をまとめて管理できる点は、LEAN BODYの大きな強みです。</p>
+    <p class="section-sub" style="margin-top:20px;">公式でもこの3つを「フィットネス」「食事管理」「記録」として紹介しています。</p>
   </div>
 </section>
 
@@ -1311,11 +1475,11 @@
       <div class="purpose-item reveal"><div class="q">運動不足を解消したい</div><div class="a">→ LEAN BODY</div></div>
       <div class="purpose-item reveal"><div class="q">ダイエットしたい</div><div class="a">→ LEAN BODY</div></div>
       <div class="purpose-item reveal"><div class="q">LIVE中心で運動したい</div><div class="a">→ 24/7 Online Fitness</div></div>
-      <div class="purpose-item reveal"><div class="q">ヨガ・ピラティスを楽しみたい</div><div class="a">→ ルネサンス</div></div>
-      <div class="purpose-item reveal"><div class="q">スポーツクラブのレッスンが好き</div><div class="a">→ コナミ</div></div>
+      <div class="purpose-item reveal"><div class="q">ヨガ・ピラティスを楽しみたい</div><div class="a">→ ルネサンス オンライン Livestream</div></div>
+      <div class="purpose-item reveal"><div class="q">スポーツクラブのレッスンが好き</div><div class="a">→ コナミスポーツクラブ オンラインフィットネス</div></div>
       <div class="purpose-item reveal"><div class="q">好きな時間に隙間で運動したい</div><div class="a">→ LEAN BODY</div></div>
       <div class="purpose-item reveal"><div class="q">帰宅時間が不規則・在宅ワーカー</div><div class="a">→ LEAN BODY</div></div>
-      <div class="purpose-item reveal"><div class="q">運動を一人で続けられない</div><div class="a">→ 24/7 / ルネサンス</div></div>
+      <div class="purpose-item reveal"><div class="q">運動を一人で続けられない</div><div class="a">→ <span class="rec-chip">24/7 Online Fitness</span> <span class="rec-chip">ルネサンス オンライン Livestream</span></div></div>
     </div>
   </div>
 </section>
@@ -1369,16 +1533,6 @@
   } else {
     reveals.forEach(function(el){ el.classList.add('is-visible'); });
   }
-
-  var timeTabs = document.querySelectorAll('.time-tab');
-  var timeRec = document.getElementById('timeRec');
-  timeTabs.forEach(function(tab){
-    tab.addEventListener('click', function(){
-      timeTabs.forEach(function(t){ t.classList.remove('active'); });
-      tab.classList.add('active');
-      timeRec.textContent = tab.getAttribute('data-rec');
-    });
-  });
 
   var hamburgerBtn = document.getElementById('hamburgerBtn');
   var navPanel = document.getElementById('navPanel');
